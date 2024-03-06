@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.qtorder.db.MemberMapper">
+
+	<insert id="join">
+		insert into tb_menu (rst_idx, menu_name, menu_price, menu_img, menu_status, menu_category, menu_waiting_time)
+		values (1,'test12312',1231,'test','test','test',12313);
+	</insert>
+</mapper>
