@@ -4,9 +4,9 @@
   "https://mybatis.org/dtd/mybatis-3-config.dtd">
 
 
-<configuration>
-	<properties resource="kr/qtorder/db/db.properties">
-	</properties>
+	<configuration>
+		<properties resource="kr/qtorder/db/db.properties">
+		</properties>
 
 	<environments default="development">
 
@@ -26,5 +26,14 @@
 
 	<mappers>
 		<mapper resource="kr/qtorder/db/MemberMapper.xml" />
+		<mapper resource="kr/qtorder/db/FoodTruckMapper.xml" />
+		<mapper resource="kr/qtorder/db/FestivalMapper.xml" />
+		<mapper resource="kr/qtorder/db/FestivalLocMapper.xml" />
+		<mapper resource="kr/qtorder/db/FesMemberMapper.xml" />
+		<mapper resource="kr/qtorder/db/NoticeMapper.xml" />
+		<mapper resource="kr/qtorder/db/FesAddListMapper.xml" />
+		<mapper resource="kr/qtorder/db/menuMapper.xml" />
+		<mapper resource="kr/qtorder/db/userMapper.xml" />
+		<mapper resource="kr/qtorder/db/MenuSelectMapper.xml" />
 	</mappers>
 </configuration>

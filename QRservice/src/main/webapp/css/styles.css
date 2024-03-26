@@ -710,12 +710,12 @@ progress {
   }
 }
 @media (min-width: 1200px) {
-  .container-xl, .container-lg, .container-md, .container-sm, .container {
+  .container-xl, .container-lg, .container-md, .container-sm, .container, .container-xl1 {
     max-width: 1140px;
   }
 }
 @media (min-width: 1500px) {
-  .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
+  .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container, .container-xl1 {
     max-width: 1440px;
   }
 }

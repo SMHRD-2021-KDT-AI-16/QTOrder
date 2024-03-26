@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.qtorder.db.MenuSelectMapper">
+
+	<select id="loadInfo" resultType="kr.qtorder.model.FoodTruckVO">
+		SELECT * FROM tb_foodtruck WHERE ft_idx=#{ft_idx}
+	</select>
+	
+	<select id="loadImg" resultType="kr.qtorder.model.FtImgVO">
+		SELECT * FROM tb_img WHERE ft_idx=#{ft_idx}
+	</select>
+	
+	
+	<select id="bestMenu" resultType="kr.qtorder.model.BestMenuVO">
+		Select menu_idx, ft_idx, menu_name, menu_price, menu_img, menu_category 
+		from tb_menu
+		where ft_idx = #{num}
+		and menu_main = 1;
+	</select>
+	
+	<select id="setMenu" resultType="kr.qtorder.model.SetMenuVO">
+		SELECT mg.group_idx, mg.ft_idx, mg.group_name, m.menu_idx, m.menu_name, m.menu_price, m.menu_img
+		FROM tb_menu_group AS mg
+		LEFT JOIN tb_menu_group_value AS mgv ON mg.group_idx = mgv.group_idx
+		LEFT JOIN tb_menu AS m ON mgv.menu_idx = m.menu_idx
+		WHERE mg.ft_idx = #{num};
+	</select>
+	
+	<select id="setGroup" resultType="kr.qtorder.model.SetGroupVO">
+		SELECT * FROM tb_menu_group
+		where ft_idx = #{num};
+	</select>
+	
+	<select id="allMenu" resultType="kr.qtorder.model.BestMenuVO">
+		Select menu_idx, ft_idx, menu_name, menu_price, menu_img, menu_category 
+		from tb_menu
+		where ft_idx = #{num};
+	</select>
+	
+	<select id="cartcheck" resultType="Integer" parameterType="String">
+    	SELECT EXISTS (SELECT 1 FROM tb_cart WHERE cust_phone = #{custPhone}) AS exists_flag
+	</select>
+	
+</mapper>

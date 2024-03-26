@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.qtorder.db.menuMapper">
+
+	<select id="getReceipt" resultType="kr.qtorder.model.ReceiptVO">
+		select a.a.order_idx, a.cust_phone, a.ordered_at, a.cust_name, a.ft_name, a.menu_name, a.menu_cnt, a.menu_price, a.mo_name, b.mo_notice
+		from (select a.a.order_idx, a.cust_phone, a.ordered_at, a.cust_name, a.ft_name, a.menu_name, a.menu_price, a.od_idx, b.mo_name, a.menu_cnt
+		from (select a.order_idx, a.cust_phone, a.ordered_at, a.cust_name, a.ft_name, b.menu_name, menu_price, a.mo_idx, a.od_idx, a.menu_cnt
+		from (select a.*,b.menu_idx, b.mo_idx, b.od_idx, b.menu_cnt
+		from (select a.order_idx, cust_phone, ordered_at, cust_name, b.ft_name
+		from (SELECT a.*, b.cust_name
+		FROM tb_order AS a
+		LEFT JOIN tb_customer AS b ON a.cust_phone = b.cust_phone) as a
+		left join tb_foodtruck as b on a.ft_idx=b.ft_idx) as a
+		left join tb_order_menu as b on a.order_idx = b.order_idx) as a
+		left join tb_menu as b on a.menu_idx = b.menu_idx) as a
+		left join tb_menu_option as b on a.mo_idx = b.mo_idx) as a
+		left join tb_option_detail as b on a.od_idx = b.od_idx
+		where cust_phone = #{cust_phone};
+	</select>
+
+	<select id="getReceiptDetail" parameterType="kr.qtorder.model.ReceiptVO" resultType="kr.qtorder.model.ReceiptVO">
+		select a.a.order_idx, a.cust_phone, a.ordered_at, a.cust_name, a.ft_name, a.menu_name, a.menu_cnt, a.menu_price, a.mo_name, b.mo_notice
+		from (select a.a.order_idx, a.cust_phone, a.ordered_at, a.cust_name, a.ft_name, a.menu_name, a.menu_price, a.od_idx, b.mo_name, a.menu_cnt
+		from (select a.order_idx, a.cust_phone, a.ordered_at, a.cust_name, a.ft_name, b.menu_name, menu_price, a.mo_idx, a.od_idx, a.menu_cnt
+		from (select a.*,b.menu_idx, b.mo_idx, b.od_idx, b.menu_cnt
+		from (select a.order_idx, cust_phone, ordered_at, cust_name, b.ft_name
+		from (SELECT a.*, b.cust_name
+		FROM tb_order AS a
+		LEFT JOIN tb_customer AS b ON a.cust_phone = b.cust_phone) as a
+		left join tb_foodtruck as b on a.ft_idx=b.ft_idx) as a
+		left join tb_order_menu as b on a.order_idx = b.order_idx) as a
+		left join tb_menu as b on a.menu_idx = b.menu_idx) as a
+		left join tb_menu_option as b on a.mo_idx = b.mo_idx) as a
+		left join tb_option_detail as b on a.od_idx = b.od_idx
+		where cust_phone = #{cust_phone} and order_idx=#{order_idx}
+	</select>
+	
+	<select id="getmenudetail" resultType="kr.qtorder.model.Menu_DetailVO">
+		select a.*, b.mo_notice, od_idx
+		from (select a.ft_idx, a.menu_idx, menu_name, menu_price, menu_img, menu_waiting_time, b.mo_idx, mo_name
+		from tb_menu as a
+		left join tb_menu_option as b on a.menu_idx = b.menu_idx
+		where a.menu_idx = #{menu_idx})as a
+		left join tb_option_detail as b on a.mo_idx = b.mo_idx;
+	</select>
+	
+	<insert id="insertcart">
+		insert into tb_cart (cust_phone, cart_at) values (#{cust_phone}, sysdate());
+	</insert>
+	
+	<select id="getCartnum" resultType="int">
+		select cart_num from tb_cart where cust_phone = #{cust_phone}
+	</select>
+	
+	<insert id="insertCartProduct" parameterType="kr.qtorder.model.CartproductVO123">
+		insert into tb_cart_product (cart_num, menu_idx, menu_cnt, mo_idx, od_idx, ft_idx) values (#{cart_num},#{menu_idx},#{menu_cnt},#{mo_idx},#{od_idx},#{ft_idx})
+	</insert>
+	
+	<select id="getCart" resultType="kr.qtorder.model.FoodCartVO123">
+		select a.ft_idx, ft_name, menu_idx, menu_name, menu_cnt, menu_price, a.mo_idx, mo_name, a.od_idx ,b.mo_notice
+		from (select a.cust_phone, menu_cnt, od_idx, a.menu_idx, menu_name, menu_price, ft_idx, ft_name, b.mo_name, b.mo_idx
+		from (select a.cust_phone, menu_cnt, mo_idx, od_idx, menu_idx, menu_name, menu_price, a.ft_idx, b.ft_name
+		from (select a.cust_phone, menu_cnt, mo_idx, od_idx, b.menu_name, menu_price, ft_idx, b.menu_idx
+		from (select a.*, b.menu_idx, menu_cnt, mo_idx, od_idx
+		from tb_cart as a
+		left join tb_cart_product as b on a.cart_num = b.cart_num
+		where cust_phone = #{cust_phone}) as a
+		left join tb_menu as b on a.menu_idx = b.menu_idx)as a
+		left join tb_foodtruck as b on a.ft_idx = b.ft_idx) as a
+		left join tb_menu_option as b on a.mo_idx = b.mo_idx) as a
+		left join tb_option_detail as b on a.od_idx = b.od_idx;
+	</select>
+	
+	<delete id="delete_cartproduct">
+		delete from tb_cart_product where cart_num = #{cart_num}
+	</delete>
+	<delete id="delete_cart">
+		delete from tb_cart where cust_phone = #{cust_phone}
+	</delete>
+	
+	
+	<!-- 주문 매퍼 -->
+	<insert id="insert_order" parameterType="kr.qtorder.model.OrderVO123">
+		insert into tb_order (cust_phone, ft_idx, ordered_at, order_state) values (#{cust_phone}, #{ft_idx}, sysdate(), "대기")
+	</insert>
+	
+	<select id="getordernum" parameterType="kr.qtorder.model.OrderVO123" resultType="int">
+		select order_idx from tb_order where cust_phone=#{cust_phone} and ft_idx = #{ft_idx} and order_state = "대기";
+	</select>
+	
+	<insert id="insert_order_detail" parameterType="kr.qtorder.model.Order_menuVO">
+		insert into tb_order_menu (order_idx, menu_idx, mo_idx, od_idx, menu_cnt) values (#{order_idx}, #{menu_idx}, #{mo_idx}, #{od_idx}, #{menu_cnt})
+	</insert>
+	
+	
+	
+</mapper>

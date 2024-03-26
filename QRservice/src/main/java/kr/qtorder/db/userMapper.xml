@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="kr.qtorder.db.userMapper">
+	<insert id="insert_business" parameterType="kr.qtorder.model.BusinessVO">
+		insert into tb_foodtruck (ft_name, ft_tel, ft_owner, ft_bno, ft_pw) values (#{ft_name},#{ft_tel},#{ft_owner},#{ft_bno},#{ft_pw});
+	</insert>
+
+	<select id="login_check" parameterType="kr.qtorder.model.BusinessVO" resultType="kr.qtorder.model.BusinessVO">
+    	select * from tb_foodtruck where ft_bno = #{ft_bno} and ft_pw=#{ft_pw};
+	</select>
+
+	<insert id="insert_customer" parameterType="kr.qtorder.model.CustomerVO">
+		insert into tb_customer (cust_phone, cust_name) values (#{cust_phone},#{cust_name})
+	</insert>
+
+	<select id="customer_check" parameterType="kr.qtorder.model.CustomerVO" resultType="kr.qtorder.model.CustomerVO">
+		select * from tb_customer where cust_phone = #{cust_phone} and cust_name = #{cust_name}
+	</select>
+
+</mapper>

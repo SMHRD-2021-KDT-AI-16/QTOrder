@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.qtorder.db.NoticeMapper">
+	
+	<select id="selectNotice" resultType="kr.qtorder.model.NoticeVO">
+		select * from tb_notice;
+	</select>
+	
+	<insert id="noticeCreate" parameterType="kr.qtorder.model.NoticeVO">
+		INSERT INTO tb_notice 
+		(notice_title, notice_content, notice_file, created_at, ft_idx) 
+		VALUES 
+		(#{notice_title}, #{notice_content}, #{notice_file}, NOW(), #{ft_idx});
+	</insert>
+	
+	<select id="noticeDetail" resultType="kr.qtorder.model.NoticeVO">
+		select * from tb_notice where notice_idx=#{num};
+	</select>
+	
+	<update id="noticeEdit" parameterType="kr.qtorder.model.NoticeVO">
+		UPDATE tb_notice
+		SET notice_title=#{notice_title}, notice_content=#{notice_content}
+		WHERE notice_idx=#{notice_idx};
+	</update>
+	
+	<delete id="noticeDelete" parameterType="kr.qtorder.model.NoticeVO">
+		DELETE FROM tb_notice
+		WHERE notice_idx=#{notice_idx};
+	</delete>
+	
+</mapper>

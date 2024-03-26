@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.qtorder.db.FesMemberMapper">
+
+	<insert id="fes_join" parameterType="kr.qtorder.model.FesMemberVO">
+		INSERT INTO tb_fes_admin (admin_id, admin_pw)
+		VALUES (#{admin_id}, #{admin_pw});
+	</insert>
+	
+	<select id="idCheck" parameterType="String" resultType="boolean">
+		SELECT
+		CASE WHEN COUNT(*)>0 THEN 1
+		ELSE 0
+		END RESULT
+		FROM tb_fes_admin 
+		WHERE admin_id = #{admin_id}
+	</select>
+	
+	<select id="login" parameterType="kr.qtorder.model.FesMemberVO" resultType="kr.qtorder.model.FesMemberVO">
+		SELECT admin_id, admin_pw FROM tb_fes_admin
+		WHERE admin_id = #{admin_id}
+		AND
+		admin_pw = #{admin_pw}
+	</select>
+	
+</mapper>

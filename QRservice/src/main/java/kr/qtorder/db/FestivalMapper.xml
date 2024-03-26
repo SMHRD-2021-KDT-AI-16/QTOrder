@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.qtorder.db.FestivalMapper">
+	<select id="selectFestival" resultType="kr.qtorder.model.FestivalVO">
+		SELECT * FROM tb_festival
+	</select>
+
+	<insert id="insert_festival" parameterType="kr.qtorder.model.Festival_infoVo">
+		insert into tb_festival (fes_name, fes_start, fes_end, admin_id) values (#{fes_name}, #{fes_start, jdbcType=DATE}, #{fes_end, jdbcType=DATE},#{admin_id});
+	</insert>
+	<select id="get_fes_idx" parameterType="String" resultType="String">
+		SELECT fes_idx from tb_festival where fes_name = #{fes_name}
+	</select>
+	
+	<insert id="insert_fes_loc"	parameterType="kr.qtorder.model.Fes_locVO">
+		insert into tb_fes_loc values (#{fes_idx},#{fes_loc_name},#{fes_loc_lat},#{fes_loc_lng})
+	</insert>
+	
+	<select id="get_fes_list" parameterType="String" resultType="kr.qtorder.model.Festival_infoVo">
+		select * from tb_festival where admin_id = #{admin_id}
+	</select>
+	
+	<select id="get_fes" resultType="kr.qtorder.model.FesVO">
+		select fes_idx, fes_name from tb_festival where fes_idx=#{fes_idx}
+	</select>
+	
+	<select id="getFesDate" resultType="kr.qtorder.model.FestivalVO">
+		select * from tb_festival where fes_idx = #{fes_idx}
+	</select>
+	
+	<select id="select_fes_loc" resultType="kr.qtorder.model.Fes_locVO">
+		select * from tb_fes_loc where fes_idx = #{fes_idx}
+	</select>
+	
+	<select id="user_view" resultType="kr.qtorder.model.Fes_user_viewVO">
+		select a.fes_idx, fes_name, b.ft_name, a.fes_loc_name, fes_loc_lat, fes_loc_lng
+		from
+		(select b.fes_idx, a.fes_name, a.fes_loc_name, b.fes_loc_lat, fes_loc_lng, a.ft_bno
+		from tb_join_list as a
+		left join tb_fes_loc as b on a.fes_loc_name = b.fes_loc_name
+		where fes_idx = #{fes_idx})as a
+		left join tb_foodtruck as b on a.ft_bno = b.ft_bno
+	</select>
+</mapper>
