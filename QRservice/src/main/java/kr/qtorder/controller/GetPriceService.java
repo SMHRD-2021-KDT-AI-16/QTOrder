@@ -18,11 +18,11 @@ public class GetPriceService implements Command{
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		System.out.println("price test");
 		HttpSession session = request.getSession();
-		CustomerVO customer = (CustomerVO) session.getAttribute("customerInfo");
+		CustomerVO customer = (CustomerVO) request.getServletContext().getAttribute("customerInfo");
 		String cust_phone = customer.getCust_phone();
 		MenuDetail123DAO mddao = new MenuDetail123DAO();
+		
 		List<FoodCartVO123> list = mddao.getCart(cust_phone);
 		int price = 0;
 		if(list != null) {

@@ -64,7 +64,7 @@ public class FestivalDAO {
 		SqlSession session = factory.openSession(true);
 		System.out.println("fes_idx2 : "+fes_idx);
 		FesVO fvo = session.selectOne("get_fes", fes_idx);
-		//System.out.println(fvo.getFes_name());
+		System.out.println(fvo.getFes_name());
 		session.close();
 		
 		return fvo;

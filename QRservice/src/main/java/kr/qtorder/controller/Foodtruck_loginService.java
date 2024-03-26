@@ -32,8 +32,8 @@ public class Foodtruck_loginService implements Command{
 		BusinessVO bvo2 = jdao.selectLogin(bvo);
 		System.out.println("test4 : "+bvo2.getFt_name());
 		if(bvo2 != null) {
-			HttpSession session = request.getSession();
-	        session.setAttribute("loggedInUser", bvo2);
+			//HttpSession session = request.getSession();
+	        request.getServletContext().setAttribute("loggedInUser", bvo2);
 			response.getWriter().write("Success");
 		}
 		

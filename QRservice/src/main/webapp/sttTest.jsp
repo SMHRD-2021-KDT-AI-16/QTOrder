@@ -10,6 +10,7 @@
     <button id="startButton">음성 입력 시작</button>
 <button id="stopButton" style="display: none;">음성 입력 종료</button>
 
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     const startButton = document.getElementById('startButton');
     const stopButton = document.getElementById('stopButton');
@@ -81,24 +82,69 @@
             const transcript = event.results[0][0].transcript;
             console.log('인식된 텍스트:', transcript);
             if (transcript.includes('조리 중') || transcript.trim().includes('조리 중')) {
-            	// tts 부분
-                let text = "조리 중으로 변경합니다.";
-                ttsTest(text);
+            	console.log("조리중 인식");
+                let order_idx = transcript.split("번")[0];
                 
-                console.log('주문상태를 조리중으로 변경하였습니다.');
-                
+                $.ajax({
+            		url : 'http://localhost:8081/QRservice/changeOrderStatus.do?order_idx='+order_idx,
+
+            		success : function(result) {
+            			console.log("re ",result);
+						if(result.row == 1){
+							// tts 부분
+							let text = order_idx+"번 주문 조리 중으로 변경합니다.";
+			                ttsTest(text);
+			                console.log('주문상태를 조리중으로 변경하였습니다.');
+			                recognition.stop();
+			                
+			                // sms 전송
+			                //checkTimeAndExecuteService();
+			                
+			                
+			                setTimeout(function() {
+			                    recognition.start();
+			                }, 1000); 
+						}
+            		},
+            		error : function() {
+
+            		}
+            	});
+
                 recognition.stop();
                 
                 setTimeout(function() {
                     recognition.start();
                 }, 1000); 
             }
+            
             if(transcript.includes('완료')){
-            	let text = "주문 완료 처리되었습니다.";
-                ttsTest(text);
+            	
+				let order_idx = transcript.split("번")[0];
                 
-                console.log('주문 완료 처리되었습니다.');
-                console.log(transcript.split("번")[0]);
+                $.ajax({
+            		url : 'http://localhost:8081/QRservice/changeOrderStatus2.do?order_idx='+order_idx,
+
+            		success : function(result) {
+            			console.log("re ",result);
+						if(result.row == 1){
+							// tts 부분
+							let text = order_idx+"번 주문 배송완료로 변경합니다.";
+			                ttsTest(text);
+			                console.log('주문상태를 배송완료로 변경하였습니다.');
+			                recognition.stop();
+			                
+			                setTimeout(function() {
+			                    recognition.start();
+			                }, 1000); 
+						}
+            		},
+            		error : function() {
+
+            		}
+            	});
+                
+                
                 
                 recognition.stop();
                 
@@ -106,6 +152,7 @@
                     recognition.start();
                 }, 1000);
             }
+            
 			if(transcript.includes('취소')){
 				let text = "주문 취소 처리되었습니다.";
                 ttsTest(text);
@@ -117,6 +164,16 @@
                     recognition.start();
                 }, 1000);
             }
+			
+			if(transcript.includes("다시")){
+				let text = "음성인식을 다시 활성화 합니다.";
+                ttsTest(text);
+				recognition.stop();
+                
+                setTimeout(function() {
+                    recognition.start();
+                }, 1000);
+			}
         }
 
         recognition.onerror = function(event) {
@@ -142,6 +199,21 @@
 
 	synth.speak(utterance);
  }
+ 
+ function checkTimeAndExecuteService() {
+	$.ajax({
+		type: "POST",
+	    url: "http://localhost:8081/QRservice/postmsg.do",
+	    data: { /* 서비스에 필요한 데이터 */},
+	    success: function(response) {
+	                    
+	    },
+	    error: function(xhr, status, error) {
+	                    
+	    }
+	});
+	   
+}
 </script>
 
 </body>

@@ -28,7 +28,7 @@ public class FesLoginService implements Command {
 		
 		if (result != null) {
 			HttpSession session = request.getSession();
-			session.setAttribute("loginId", result.getAdmin_id());
+			request.getServletContext().setAttribute("loginId", result.getAdmin_id());
 			
 			System.out.println("로그인 성공");
 			return "list_festival.jsp";

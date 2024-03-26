@@ -23,7 +23,7 @@ public class InsertOrderService implements Command {
 		
 		HttpSession session = request.getSession();
 
-		CustomerVO customer = (CustomerVO) session.getAttribute("customerInfo");
+		CustomerVO customer = (CustomerVO) request.getServletContext().getAttribute("customerInfo");
 		String cust_phone = customer.getCust_phone();
 		List<FoodCartVO123> fcvo = (List<FoodCartVO123>) session.getAttribute("basketlist");
 		int ft_idx = fcvo.get(0).getFt_idx();

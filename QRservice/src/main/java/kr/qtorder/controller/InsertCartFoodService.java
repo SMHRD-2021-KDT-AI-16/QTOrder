@@ -19,7 +19,7 @@ public class InsertCartFoodService implements Command {
 		
 		HttpSession session = request.getSession();
 
-		CustomerVO customer = (CustomerVO) session.getAttribute("customerInfo");
+		CustomerVO customer = (CustomerVO) request.getServletContext().getAttribute("customerInfo");
 		String cust_phone = customer.getCust_phone();
 		int ft_idx = Integer.parseInt(request.getParameter("ft_idx"));
 		System.out.println("2 : "+ft_idx);

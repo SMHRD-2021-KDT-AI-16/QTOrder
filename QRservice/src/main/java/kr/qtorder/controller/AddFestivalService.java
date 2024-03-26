@@ -23,9 +23,9 @@ public class AddFestivalService implements Command{
 		
 		//HttpSession session = request.getSession();
 
-		//AdminVO123 admin = (AdminVO123) session.getAttribute("admin");
-		//String admin_id = admin.getAdmin_id();
-		String admin_id = "admin";
+		AdminVO123 admin = (AdminVO123) request.getServletContext().getAttribute("admin");
+		String admin_id = admin.getAdmin_id();
+		//String admin_id = "admin";
 		String fes_name = request.getParameter("fes_name");
 		String fes_start = request.getParameter("fes_start");
 		String fes_end = request.getParameter("fes_end");

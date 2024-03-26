@@ -93,6 +93,13 @@
 		insert into tb_order_menu (order_idx, menu_idx, mo_idx, od_idx, menu_cnt) values (#{order_idx}, #{menu_idx}, #{mo_idx}, #{od_idx}, #{menu_cnt})
 	</insert>
 	
+	<update id="chgOrStat">
+		update tb_order set order_state = "조리중" where order_idx=#{order_idx}
+	</update>
+	<update id="chgOrStat2">
+		update tb_order set order_state = "완료" where order_idx=#{order_idx}
+	</update>
+	
 	
 	
 </mapper>

@@ -34,4 +34,20 @@ public class OrderDAO {
 		System.out.println("row : "+row);
 		session.close();
 	}
+	
+	public int chgOrderStatus(int order_idx) {
+		SqlSession session = factory.openSession(true);
+		
+		int row = session.update("chgOrStat", order_idx);
+		session.close();
+		return row;
+	}
+	
+	public int chgOrderStatus2(int order_idx) {
+		SqlSession session = factory.openSession(true);
+		
+		int row = session.update("chgOrStat2", order_idx);
+		session.close();
+		return row;
+	}
 }

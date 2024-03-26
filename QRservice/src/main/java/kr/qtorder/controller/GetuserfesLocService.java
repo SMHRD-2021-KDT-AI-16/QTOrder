@@ -19,7 +19,11 @@ public class GetuserfesLocService implements Command {
 			throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		FesVO fvo = (FesVO) session.getAttribute("fesname");
+		// 다른 Service.java 파일에서 fesname 속성의 값을 가져오는 예시 코드
+		FesVO fvo = (FesVO) request.getServletContext().getAttribute("fesname");
+
+		//FesVO fvo = (FesVO) session.getAttribute("fesname");
+		System.out.println("fvo "+fvo);
 		int fes_idx = fvo.getFes_idx();
 		
 		FestivalDAO fdao = new FestivalDAO();

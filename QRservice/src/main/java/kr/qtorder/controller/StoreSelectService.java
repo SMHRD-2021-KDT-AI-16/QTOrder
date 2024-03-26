@@ -17,7 +17,7 @@ public class StoreSelectService implements Command{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("test");
+		
 		FoodTruckDAO dao = new FoodTruckDAO();
 		HttpSession session = request.getSession();
 		
