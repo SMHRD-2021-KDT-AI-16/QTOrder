@@ -36,7 +36,7 @@
     </div>
     <div class="separator"></div>
     <div style="display: inline-block;">
-        <a class="btn" href="getmap.do"><i data-feather="map-pin" style="font-size: 24px;"></i>지도</a>
+        <a class="btn" href="user_viewMap.do"><i data-feather="map-pin" style="font-size: 24px;"></i>지도</a>
     </div>
     <div class="separator"></div>
     <div style="display: inline-block;" class="dropdown">

@@ -73,8 +73,6 @@ public class Frontcontroller extends HttpServlet {
 		map.put("getreceipt.do", new ReceiptCheckService());
 		map.put("getreceiptdetail.do", new GetReceiptDetailService());
 		map.put("cus_choice_menu.do", new MenuSelectService());
-		
-		
 		map.put("user_viewMap.do", new GetuserfesLocService());
 		map.put("bus_check2.do", new Bus_check2Service());
 		map.put("getfesti_loc.do", new GetfestiLocService());
@@ -105,8 +103,8 @@ public class Frontcontroller extends HttpServlet {
 		} else {
 
 			com = map.get(path);
-			System.out.println("com : "+com);
 
+			System.out.println("com : "+com);
 			finalPath = com.execute(req, resp);
 		}
 		

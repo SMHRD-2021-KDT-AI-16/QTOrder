@@ -27,7 +27,7 @@
 									<form>
 										<div class="mb-3">
 											<label class="small mb-1" for="businessNumber">사업자번호</label>
-											<input class="form-control" id="businessNumber" type="text" placeholder="사업자번호를 입력해주세요" />
+											<input class="form-control" id="businessNumber" type="text" placeholder="사업자번호를 입력해주세요" oninput="addHyphen(this)" />
 										</div>
 									
 										<div class="mb-3">
@@ -78,7 +78,7 @@
 					if(result){
 						alert("로그인 성공");
 						
-						//window.location.href = ".jsp";
+						window.location.href = "order3.jsp";
 					}else{
 						alert("사업자 번호 혹은 비밀번호를 확인해 주세요.");
 					}
@@ -87,6 +87,26 @@
 
 				}
 			});
+		}
+		function addHyphen(input) {
+		    
+			var numOnly = input.value.replace(/\-/g, '');
+		    var num = input.value;
+
+		    if (num.length >= 12) {
+		        input.value = num.substring(0, 12);
+		        return;
+		    }
+		    
+		    var formattedNum = '';
+		    for (var i = 0; i < numOnly.length; i++) {
+		        if ((i === 3 || i === 5) && i < 10) {
+		            formattedNum += '-';
+		        }
+		        formattedNum += numOnly.charAt(i);
+		    }
+
+		    input.value = formattedNum;
 		}
 	</script>
 </body>
