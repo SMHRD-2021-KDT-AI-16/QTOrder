@@ -25,6 +25,5 @@ public class SqlSessionManager {
 
 	public static SqlSessionFactory getFactory() {
 		return sqlSessionFactory;
-
 	}
 }

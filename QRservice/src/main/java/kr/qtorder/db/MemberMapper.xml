@@ -9,4 +9,94 @@
 		insert into tb_menu (rst_idx, menu_name, menu_price, menu_img, menu_status, menu_category, menu_waiting_time)
 		values (1,'test12312',1231,'test','test','test',12313);
 	</insert>
+	
+	<insert id="addMenuGroup" parameterType = "String">
+		insert into tb_menu_group (ft_idx, group_name) values(7, #{group_name});
+	</insert>
+	
+	<insert id="saveMenuGroup" parameterType="Map">
+		insert into tb_menu_group_value (group_idx, menu_idx) values (#{groupName}, #{ menuIdx });
+	</insert>
+	
+	<insert id="addMenu" parameterType="Map">
+		insert into tb_menu (ft_idx, menu_name, menu_price, menu_img, menu_status, menu_category, menu_waiting_time, menu_info)
+		values(7, #{menu_name}, #{menu_price}, "assets/img/hotdog", "ready", "핫도그", #{menu_duration}, #{menu_info});
+	</insert>
+	
+	<select id="selectMenu" parameterType = 'kr.qtorder.model.MenuVO'  resultType = 'kr.qtorder.model.MenuVO'  >
+		select * from tb_menu where ft_idx = 5;
+	</select>
+	
+	<select id="selectMenuAll" parameterType = 'kr.qtorder.model.MenuVO'  resultType = 'kr.qtorder.model.MenuVO'  >
+		select * from tb_menu where ft_idx = 7;
+	</select>
+	
+	<update id="addMainMenu" parameterType="String" >		
+		update tb_menu set menu_main = 1 where menu_name = #{menu_name};
+	</update>
+	
+	<update id="updateMenu" parameterType="hashmap" >		
+		update tb_menu
+		set menu_name = #{menu_name}, menu_price = #{menu_price}, menu_info = #{menu_info}, menu_waiting_time = #{menu_duration}
+		where menu_idx = #{menu_idx};
+	</update>
+	
+	<update id="deleteMainMenu" parameterType="String" >		
+		update tb_menu set menu_main = 0 where menu_name = #{menu_name};
+	</update>
+	
+	<select id="selectOrderList" parameterType = 'kr.qtorder.model.MenuVO'  resultType = 'hashmap'  >
+		select A.order_idx, B.menu_name, A.menu_cnt, B.menu_price, D.ft_name, C.order_state  
+		from tb_order_menu A
+			left outer join tb_menu B
+		    on A.menu_idx = B.menu_idx
+		    left outer join tb_order C
+			on A.order_idx = C.order_idx
+		    left outer join tb_foodtruck D
+		    on C.ft_idx = D.ft_idx
+		where C.ft_idx = 7;
+	</select>	
+	
+	<select id="selectMenuGroup" parameterType = 'kr.qtorder.model.MenuVO'  resultType = 'hashmap'  >
+		select * from tb_menu_group A where ft_idx = 7;
+	</select>
+	
+	<select id="getMenuGroup" parameterType = 'kr.qtorder.model.MenuVO'  resultType = 'hashmap'  >
+		select A.group_idx, A.ft_idx, A.group_name, C.menu_idx, C.menu_name
+		from tb_menu_group A
+			left outer join tb_menu_group_value B
+		    on A.group_idx = B.group_idx
+		    left outer join tb_menu C
+		    on B.menu_idx = C.menu_idx
+		where A.ft_idx = 7 and C.menu_name is not null;;
+	</select>
+	
+	<delete id = "resetMenuGroup">
+		delete from tb_menu_group_value where group_idx >= 1;
+	</delete>
+	
+	<delete id = "deleteMenu">
+		delete from tb_menu where menu_idx = #{ menu_idx };
+	</delete>
+	
+	<select id = "selectOrderMenuDetail" resultType = 'hashmap'  >
+		select A.om_idx, A.order_idx, A.menu_idx, A.menu_cnt, A.mo_idx, B.menu_name, C.mo_name, D.mo_notice, B.menu_price
+		from tb_order_menu A
+			left outer join tb_menu B
+			on A.menu_idx = B.menu_idx
+		    left outer join tb_menu_option C
+		    on A.menu_idx = C.menu_idx
+		    left outer join tb_option_detail D
+		    on A.od_idx = D.od_idx
+		where order_idx = #{ order_idx };
+	</select>
+	<select id = "selectMenuOptions" resultType = 'hashmap'  >
+		select A.menu_idx, A.ft_idx, A.menu_name, A.menu_price, A.menu_status, B.mo_name, C.mo_notice
+		from tb_menu A
+			left outer join tb_menu_option B
+		    on A.menu_idx = B.menu_idx
+		    left outer join tb_option_detail C
+		    on B.mo_idx = C.mo_idx
+		where A.menu_idx = #{ menu_idx };
+	</select>
 </mapper>

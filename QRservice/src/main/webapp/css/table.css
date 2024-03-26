@@ -1,0 +1,47 @@
+table {
+  border-collapse: collapse;
+  width: 400px;
+  margin: 0rem auto;
+  box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+ /* 테이블 행 */
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+th {
+  background-color: #1b1b1b;
+  color: #ddd;
+}
+
+/* 테이블 올렸을 때 */
+.table-active {
+background-color: #e8f3ff;
+  opacity: 0.9;
+}
+tbody tr:hover {
+  background-color: #d3d3d3;
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+/* 테이블 비율 */
+th:nth-child(1),
+td:nth-child(1) {
+  width: 20%;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+  width: 55%;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+  width: 25%;
+}
