@@ -560,6 +560,10 @@
                                     <a class="nav-link" href="#!">주문 표</a>
                                 </nav>
                             </div>
+                            <a class="nav-link collapsed" href="accounts.jsp">
+                                <div class="nav-link-icon"><i data-feather="dollar-sign"></i></div>
+                                정산
+                            </a>
                             
                         </div>
                     </div>
@@ -603,7 +607,6 @@
 	                       <div id="app" class="vue-container" :style="{ 'transform': `translateX(\${translateX}px)` }">                     
 	                         <card v-for="(order, index) in orders" :key="order" @click.native="moveCardToFirst(index)"
 	                               data-image="https://media.istockphoto.com/id/157479378/ko/%EC%82%AC%EC%A7%84/%ED%95%AB%EB%8F%84%EA%B7%B8-%EB%A8%B8%EC%8A%A4%ED%84%B0%EB%93%9C%EC%99%80-%EC%BC%80%EC%B2%A9.jpg?s=612x612&w=0&k=20&c=108PFIu9ndXIOMoI7seKRti7ge3-s0Us2iay6duRRAM=">
-	         
 	                           <div slot="number" class="corner-tag"> {{order.order_idx}}</div>    
 	                           <div slot="state" class="corner-tag2"> {{order.order_state}}</div>                    
 	                           <h1 slot="header" style="display: flex">{{order.menu_name}}</h1>
@@ -629,6 +632,7 @@
     </body>
        
     <script type="text/javascript">
+    
        /* function startInterval() {
          interval = setInterval( () => {
             $.ajax({
@@ -773,7 +777,8 @@
                        this.orders = data;                       
                        const orderIds = [...new Set(data.map(order => order.order_idx))];
                        this.order_num = orderIds;
-                       console.log(data)                       
+                       console.log(data)
+                       
                      },
                      error: () => {
                        console.log("error");
@@ -814,6 +819,7 @@
               app.moveCardRight(); // Vue 인스턴스의 moveCard 메소드 호출
           });
       });
+      
    </script>
 </body>
 </html>

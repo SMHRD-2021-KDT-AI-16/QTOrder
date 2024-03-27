@@ -130,3 +130,226 @@
 .hiddenbtn {
 	display: none;
 }
+
+#empty {
+	width: 100%;
+	height: 5%;
+}
+
+#map {
+
+	width: 100%;
+	height: 60%;
+}
+
+#waypoint_list {
+	background-color: white;
+	width: 100%;
+	height: 35%;
+	max-height: 35%;
+	overflow-y: auto;
+}
+
+.way_loc {
+	display: none;
+}
+
+.waydiv {
+	display: inline-block;
+	padding-left: 20px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+.dotOverlay {
+	position: relative;
+	bottom: 10px;
+	border-radius: 6px;
+	border: 1px solid #ccc;
+	border-bottom: 2px solid #ddd;
+	float: left;
+	font-size: 12px;
+	padding: 5px;
+	background: #fff;
+}
+
+.dotOverlay:nth-of-type(n) {
+	border: 0;
+	box-shadow: 0px 1px 2px #888;
+}
+
+.number {
+	font-weight: bold;
+	color: #ee6152;
+}
+
+.dotOverlay:after {
+	content: '';
+	position: absolute;
+	margin-left: -6px;
+	left: 50%;
+	bottom: -8px;
+	width: 11px;
+	height: 8px;
+	background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white_small.png')
+}
+
+.toast {
+	visibility: hidden;
+	min-width: 250px;
+	background-color: #333;
+	color: #fff;
+	text-align: center;
+	border-radius: 2px;
+	padding: 16px;
+	position: fixed;
+	z-index: 100;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.show {
+	visibility: visible;
+	-webkit-animation: fadein 0.5s, fadeout 0.5s 5s;
+	animation: fadein 0.5s, fadeout 0.5s 5s;
+}
+
+@-webkit-keyframes fadein {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes fadein {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+@-webkit-keyframes fadeout {
+	from {
+		opacity: 1;
+	}
+
+	to {
+		opacity: 0;
+	}
+}
+
+@keyframes fadeout {
+	from {
+		opacity: 1;
+	}
+
+	to {
+		opacity: 0;
+	}
+}
+
+.bg-color {
+	background-color: #FA823C;
+	border-color: #FA823C;
+}
+
+.text-col {
+	color: black !important;
+}
+
+#empty {
+	width: 100%;
+	height: 5%;
+}
+
+.main-bg-color {
+	background-color: #FA823C;
+}
+
+.card-body {
+	flex: 1 1 auto;
+	padding: 1.0rem !important;
+}
+
+.card-body2 {
+	flex: 1 1 auto;
+	padding: 1.0rem !important;
+	border-color: #FA823C;
+	background-color: rgba(255, 223, 164, 0.5);
+	border-radius: 15px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.group-body {
+	flex: 1 1 auto;
+	padding-top: 1.0rem !important;
+	padding-left: 1.0rem !important;
+}
+
+a {
+	color: inherit;
+	/* 링크 색상을 부모 요소의 색상으로 상속 */
+	text-decoration: none;
+	/* 밑줄 제거 */
+}
+
+a:visited,
+a:focus,
+a:hover,
+a:active {
+	color: inherit;
+	outline: none;
+	/* 클릭 또는 포커스 시 외곽선 제거 */
+	text-decoration: none;
+	/* 밑줄 제거 */
+}
+
+.name-set {
+	color: black;
+	font-size: 15px;
+	font-weight: 500;
+}
+
+.price-set {
+	color: black;
+	font-size: 15px;
+	font-weight: 500;
+}
+
+.info-set {
+	color: black !important;
+	font-weight: bold;
+}
+
+.info-set2 {
+	color: black !important;
+}
+
+.flex-container {
+	display: flex;
+	/* Flexbox 레이아웃 사용 */
+	justify-content: space-between;
+	/* 요소 사이의 공간을 균등하게 배분하여 좌우 정렬 */
+	align-items: center;
+	/* 수직 정렬을 가운데로 설정 */
+}
+
+.flex-item {
+	flex: 1;
+	/* Flex item을 동일한 크기로 설정 */
+}
+
+.mb-3 img {
+	width: 100%;
+	/* 부모 요소에 맞게 이미지 너비를 100%로 설정 */
+	height: auto;
+	/* 이미지 높이 자동 조절 */
+}

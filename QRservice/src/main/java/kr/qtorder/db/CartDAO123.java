@@ -59,5 +59,29 @@ public class CartDAO123 {
 		session.close();
 	}
 	
+	public void removeCartOne(int cart_product_num) {
+		SqlSession session = factory.openSession(true);
+		session.delete("delete_cartone", cart_product_num);
+		session.close();
+	}
 	
+	public int cart_product_check(CartproductVO123 cpvo) {
+		SqlSession session = factory.openSession(true);
+		int yn = session.selectOne("cart_product_check",cpvo);
+		session.close();
+		return yn;
+	}
+	
+	public int update_cartproduct(CartproductVO123 cpvo) {
+		SqlSession session = factory.openSession(true);
+		int row = session.update("cart_update_cnt", cpvo);
+		session.close();
+		return row;
+	}
+	public int get_ft_idx(int cart_num) {
+		SqlSession session = factory.openSession(true);
+		int ft_idx = session.update("get_ftnum", cart_num);
+		session.close();
+		return ft_idx;
+	}
 }

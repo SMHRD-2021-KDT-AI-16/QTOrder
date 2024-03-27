@@ -24,22 +24,6 @@
 <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
 <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
- <style>
-    .bg-color {
-      background-color: #FA823C;
-      border-color: #FA823C;
-    }
-
-    .text-col {
-      color: black !important;
-    }
-
-        	#empty{
-        		width: 100%;
-        		height: 5%;
-        	}
-        </style>
-
 
 </head>
 <body style="background-color: #FA823C">
@@ -137,7 +121,8 @@ if (cvo2 == null) {
                                     <hr class="m-0" />
                                     <div class="card-body p-5">
                                             <div class="mb-3">${x.ft_info}</div>
-                                            <div class="d-grid"><a class="btn btn-primary bg-color" href="cus_choice_menu.do?num=${x.ft_idx}">메뉴보기</a></div>
+                                            <div class="d-grid"><button class="btn btn-primary bg-color menu_view" type="button" value="${x.ft_idx}" onclick="cart_another_check(this.value)">메뉴보기</button></div>
+                                            <%-- <div class="d-grid"><a class="btn btn-primary bg-color" href="cus_choice_menu.do?num=${x.ft_idx}">메뉴보기</a></div> --%>
                                     </div>
                                 </div>
                             </c:forEach>
@@ -165,8 +150,58 @@ if (cvo2 == null) {
 			}
 		});
   	});
+  	
+  	function cart_another_check(ft_idx){
+  		// 메뉴보기를 누른 매장 인덱스 가져오고
+  		//var ft_idx = $(this).data('ft-idx');
+		console.log("test2", ft_idx);
+		
+		let checknum = document.getElementById("orderbtn").innerText;
+		checknum = checknum.replace("원 주문하기","");
+		console.log("checknum ",checknum);
+		
+		if(checknum == 0){
+			window.location.href = "cus_choice_menu.do?num="+ft_idx;
+		}else{
+  		
+  		// 장바구니의 매장인덱스랑 가져온거랑 비교해서 다르면
+  		$.ajax({
+			url : 'http://localhost:8081/QRservice/ft_check.do?ft_idx='+ft_idx,
+	
+			success : function(result) {
+				// 장바구니에 담긴 음식과 새로 누른 매장이 다른 곳이면
+				if(result == 0){
+					var confirmResult = confirm("장바구니에 다른 매장의 음식이 담겨있습니다. 다 비우고 이동할까요?");
+					// 예를 누르면
+					if(confirmResult){
+						removeCart(ft_idx);
+						
+					}
+				}
+			},
+			error : function() {
+				console.log("error");
+			}
+		});
+		}
+  	}
+  	
+  	function removeCart(ft_idx){
+  		console.log("rete?")
+  		$.ajax({
+			url : 'http://localhost:8081/QRservice/delete_cartAll.do',
+	
+			success : function(result) {
+				window.location.href = "cus_choice_menu.do?num="+ft_idx;
+			},
+			error : function() {
+				
+			}
+		});
+  	}
 		
 	</script>
+	<div id="empty"></div>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="js/scripts.js"></script>
 </body>

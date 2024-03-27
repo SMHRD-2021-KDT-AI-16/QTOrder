@@ -9,7 +9,6 @@
     String cust_name = customerInfo.getCust_name();
     String cust_phone = customerInfo.getCust_phone();
 	%>
-    
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -17,115 +16,42 @@
         <meta name="author" content="" />
         <title>QTOrder</title>
         <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/yg.css" rel="stylesheet" />
         <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
         <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="nav-fixed">
    
-        <nav class="topnav navbar navbar-expand shadow justify-content-between justify-content-sm-start navbar-light bg-white" id="sidenavAccordion">
-            
-            <button class="btn btn-icon btn-transparent-dark order-1 order-lg-0 me-2 ms-lg-2 me-lg-0" id="sidebarToggle"><i data-feather="menu"></i></button>
-            
-            <img id="main_logo" class="navbar-brand pe-3 ps-4 ps-lg-2" src="assets/img/logo.png">
-            
-            <form class="form-inline me-auto d-none d-lg-block me-3">
-                <div class="input-group input-group-joined input-group-solid">
-                    <input class="form-control pe-0" type="search" placeholder="Search" aria-label="Search" />
-                    <div class="input-group-text"><i data-feather="search"></i></div>
-                </div>
-            </form>
-            
-            <!-- 상단 바 -->
-            <ul class="navbar-nav align-items-center ms-auto">
-                <!-- 돋보기 아이콘 메뉴 -->
-                <li class="nav-item dropdown no-caret me-3 dropdown-notifications">
-                    <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownAlerts" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="bell"></i></a>
-                    <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownAlerts">
-                        <h6 class="dropdown-header dropdown-notifications-header">
-                            <i class="me-2" data-feather="bell"></i>
-                            Alerts Center
-                        </h6>
-                        <!-- 1번째 칸 내용 -->
-                        <a class="dropdown-item dropdown-notifications-item" href="#!">
-                            <div class="dropdown-notifications-item-icon bg-warning"><i data-feather="activity"></i></div>
-                            <div class="dropdown-notifications-item-content">
-                                <div class="dropdown-notifications-item-content-details">December 29, 2021</div>
-                                <div class="dropdown-notifications-item-content-text">10분 뒤 주문하신 음식이 조리가 완료됩니다.</div>
-                            </div>
-                        </a>
-                        
-                        <a class="dropdown-item dropdown-notifications-item" href="#!">
-                            <div class="dropdown-notifications-item-icon bg-info"><i data-feather="bar-chart"></i></div>
-                            <div class="dropdown-notifications-item-content">
-                                <div class="dropdown-notifications-item-content-details">December 22, 2021</div>
-                                <div class="dropdown-notifications-item-content-text">집에갈래</div>
-                            </div>
-                        </a>
-                        
-                        <a class="dropdown-item dropdown-notifications-item" href="#!">
-                            <div class="dropdown-notifications-item-icon bg-danger"><i class="fas fa-exclamation-triangle"></i></div>
-                            <div class="dropdown-notifications-item-content">
-                                <div class="dropdown-notifications-item-content-details">December 8, 2021</div>
-                                <div class="dropdown-notifications-item-content-text">!!!!!!!!!!!!!!!</div>
-                            </div>
-                        </a>
-                        
-                        <a class="dropdown-item dropdown-notifications-item" href="#!">
-                            <div class="dropdown-notifications-item-icon bg-success"><i data-feather="user-plus"></i></div>
-                            <div class="dropdown-notifications-item-content">
-                                <div class="dropdown-notifications-item-content-details">December 2, 2021</div>
-                                <div class="dropdown-notifications-item-content-text">?????????????????</div>
-                            </div>
-                        </a>
-                        <a class="dropdown-item dropdown-notifications-footer" href="#!">모든 알림 확인</a>
-                    </div>
-                </li>                
-            </ul>
-        </nav>
-        <!-- 상단 숨겨진 메뉴 끝 -->
+        <div id="qtlayer-up" class="qtlayer-up" style="display: flex; justify-content: center; align-items: center;">
+	    <div style="text-align: center;">
+	    <div style="display: inline-block;">
+	        <a class="btn" href="storelist.do"><i data-feather="shopping-bag" style="font-size: 24px;"></i>상점</a>
+	    </div>
+	    <div class="separator"></div>
+	    <div style="display: inline-block;">
+	        <a class="btn" href="user_viewMap.do"><i data-feather="map-pin" style="font-size: 24px;"></i>지도</a>
+	    </div>
+	    <div class="separator"></div>
+	    <div style="display: inline-block;" class="dropdown">
+	    <button id="dropdownMenuButton" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button"><i data-feather="file-text" style="font-size: 24px;"></i>주문</button>
+	    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+	    	<a class="dropdown-item" href=".do">주문현황</a>
+	        <a class="dropdown-item" href="getreceipt.do">영수증</a>
+	        </div>
+	    </div>
+		</div>
+	</div>
 
-        <div id="layoutSidenav">
-            <div id="layoutSidenav_nav">
-                <nav class="sidenav shadow-right sidenav-light">
-                    <div class="sidenav-menu">
-                        <div class="nav accordion" id="accordionSidenav">
-                            
-                            <div class="sidenav-menu-heading d-sm-none">Menu</div>
-                            
-                            <a class="nav-link d-sm-none" href="#!">
-                                <div class="nav-link-icon"><i data-feather="bell"></i></div>
-                                Home
-                                <span class="badge bg-warning-soft text-warning ms-auto">4 New!</span>
-                            </a>
-                            <!-- Sidenav Link (Messages)-->
-                            <!-- * * Note: * * Visible only on and above the sm breakpoint-->
-                            <a class="nav-link d-sm-none" href="#!">
-                                <div class="nav-link-icon"><i data-feather="mail"></i></div>
-                                Account
-                                <span class="badge bg-success-soft text-success ms-auto">2 New!</span>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- 사이드 하단 -->
-                    <div class="sidenav-footer">
-                        <div class="sidenav-footer-content">
-                            <div class="sidenav-footer-subtitle">Logged in as:</div>
-                            <div class="sidenav-footer-title">Valerie Luna</div>
-                        </div>
-                    </div>
-                </nav>
-                <!--  사이드 끝 -->
-            </div>
-
-		<!-- 중앙 상단부 -->
+	<div id="empty"></div>
+		
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-xl px-4">
 					<h4 class="mb-0 mt-5">장바구니</h4>
 					<hr class="mt-2 mb-4" />
 					<c:forEach var="x" items="${basketlist}" varStatus="loop">
-					<div class="card card-icon lift lift-sm mb-4">
+					<div id=${x.getCart_product_num() } class="card card-icon lift lift-sm mb-4">
 						<div class="row g-0">
 							<div class="col">
 								<div class="card-body py-4">
@@ -158,7 +84,7 @@
 				<div class="container-xl px-4">
 					<div class="d-flex align-items-center justify-content-between mt-4 mb-0">
 						<div id = "total_money" class="small">총 결제 금액 : 0원</div>
-						<a class="btn btn-qtbtn" type="button" href="insertOrder.do">결제(영수증페이지)</a>
+						<a class="btn btn-qtbtn" type="button" href="getcarT.do">결제(영수증)</a>
 						<button class="btn btn-qtbtn" type="button" onclick="requestPay()">결제(api)</button>
 					</div>
 				</div>
@@ -265,8 +191,21 @@
 				function delete_food(id) {
 
 					let card = document.getElementById(id).closest('.card');
+					let cardnum = card.id;
+					console.log("cardnum ",cardnum);
 					if (card) {
-						card.parentNode.removeChild(card); // 부모 노드 삭제
+						card.parentNode.removeChild(card);
+						$.ajax({
+							url : 'http://localhost:8081/QRservice/delete_cartproduct.do?cart_product_num='+cardnum,
+
+							success : function(result) {
+
+							},
+							error : function() {
+
+							}
+						});
+
 					}
 					total_money();
 				}

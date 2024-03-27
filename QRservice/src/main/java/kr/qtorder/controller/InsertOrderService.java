@@ -25,7 +25,8 @@ public class InsertOrderService implements Command {
 
 		CustomerVO customer = (CustomerVO) request.getServletContext().getAttribute("customerInfo");
 		String cust_phone = customer.getCust_phone();
-		List<FoodCartVO123> fcvo = (List<FoodCartVO123>) session.getAttribute("basketlist");
+		
+		List<FoodCartVO123> fcvo = (List<FoodCartVO123>) session.getAttribute("cartlist");
 		int ft_idx = fcvo.get(0).getFt_idx();
 		
 		System.out.println("test : "+cust_phone);
@@ -37,6 +38,7 @@ public class InsertOrderService implements Command {
 		
 		OrderDAO odao = new OrderDAO();
 		Order_menuVO omvo = new Order_menuVO();
+		
 		// order테이블에 데이터를 넣고
 		int row = odao.insertOrder(ovo);
 		
@@ -70,7 +72,7 @@ public class InsertOrderService implements Command {
 		// 카트 지워야함
 		cdao.removeCart(cust_phone);
 		
-		return "getreceipt.do";
+		return "dummy.do";
 	}
 
 }

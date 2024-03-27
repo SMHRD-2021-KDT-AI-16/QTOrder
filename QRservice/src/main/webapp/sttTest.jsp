@@ -81,9 +81,24 @@
         recognition.onresult = function(event) {
             const transcript = event.results[0][0].transcript;
             console.log('인식된 텍스트:', transcript);
+            
             if (transcript.includes('조리 중') || transcript.trim().includes('조리 중')) {
+            	
             	console.log("조리중 인식");
-                let order_idx = transcript.split("번")[0];
+            	let order_idx;
+            	
+            	var match = transcript.match(/\b\d+번?\b/g);
+            	if (match !== null) {
+            	    console.log(match[0]); // "31번" 출력
+            	    if (order_idx === undefined) {
+            	        order_idx = match[0];
+            	    }
+            	    console.log("or ",order_idx); // "31번" 출력
+            	} else {
+            	    console.log("숫자를 찾을 수 없습니다.");
+            	}
+                
+                console.log("or2 ", order_idx);
                 
                 $.ajax({
             		url : 'http://localhost:8081/QRservice/changeOrderStatus.do?order_idx='+order_idx,
@@ -95,12 +110,10 @@
 							let text = order_idx+"번 주문 조리 중으로 변경합니다.";
 			                ttsTest(text);
 			                console.log('주문상태를 조리중으로 변경하였습니다.');
-			                recognition.stop();
 			                
 			                // sms 전송
 			                //checkTimeAndExecuteService();
-			                
-			                
+			                recognition.stop();
 			                setTimeout(function() {
 			                    recognition.start();
 			                }, 1000); 
@@ -110,17 +123,26 @@
 
             		}
             	});
-
                 recognition.stop();
-                
                 setTimeout(function() {
                     recognition.start();
                 }, 1000); 
             }
             
-            if(transcript.includes('완료')){
+            else if(transcript.includes('완료')){
             	
-				let order_idx = transcript.split("번")[0];
+            	var match = transcript.match(/\b\d+번?\b/g);
+            	if (match !== null) {
+            	    console.log(match[0]); // "31번" 출력
+            	    if (order_idx === undefined) {
+            	        order_idx = match[0];
+            	    }
+            	    console.log("or ",order_idx); // "31번" 출력
+            	} else {
+            	    console.log("숫자를 찾을 수 없습니다.");
+            	}
+                
+                console.log("or2 ", order_idx);
                 
                 $.ajax({
             		url : 'http://localhost:8081/QRservice/changeOrderStatus2.do?order_idx='+order_idx,
@@ -132,8 +154,8 @@
 							let text = order_idx+"번 주문 배송완료로 변경합니다.";
 			                ttsTest(text);
 			                console.log('주문상태를 배송완료로 변경하였습니다.');
-			                recognition.stop();
 			                
+			                recognition.stop();
 			                setTimeout(function() {
 			                    recognition.start();
 			                }, 1000); 
@@ -147,30 +169,33 @@
                 
                 
                 recognition.stop();
-                
                 setTimeout(function() {
                     recognition.start();
                 }, 1000);
             }
             
-			if(transcript.includes('취소')){
+            else if(transcript.includes('취소')){
 				let text = "주문 취소 처리되었습니다.";
                 ttsTest(text);
                 console.log('주문 취소 처리되었습니다.');
                 
                 recognition.stop();
-                
                 setTimeout(function() {
                     recognition.start();
                 }, 1000);
             }
 			
-			if(transcript.includes("다시")){
-				let text = "음성인식을 다시 활성화 합니다.";
+            else if(transcript.includes("큐티")){
+				let text = "네. 말씀하세요.";
                 ttsTest(text);
-				recognition.stop();
                 
+				recognition.stop();
                 setTimeout(function() {
+                    recognition.start();
+                }, 1000);
+			}else{
+				recognition.stop();
+				setTimeout(function() {
                     recognition.start();
                 }, 1000);
 			}
@@ -191,7 +216,7 @@
 
  //tts 함수
  function ttsTest(text){
-	 var synth = window.speechSynthesis;
+	var synth = window.speechSynthesis;
 
 	var textToSpeak = text;
 

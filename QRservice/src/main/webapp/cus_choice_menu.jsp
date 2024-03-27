@@ -22,86 +22,30 @@
         <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
         <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
-        
-        <style>
-        
-        .main-bg-color {
-	      background-color: #FA823C;
-	    }
-	    
-        .card-body {
-        	flex: 1 1 auto;
-        	padding: 1.0rem !important;
-        }
-        
-        .card-body2 {
-        	flex: 1 1 auto;
-        	padding: 1.0rem !important;
-        	border-color: #FA823C;
-        	background-color: rgba(255, 223, 164, 0.5);
-        	border-radius: 15px;
-        	margin-left: 10px;
-        	margin-right: 10px;
-        }
-        
-        .group-body {
-        	flex: 1 1 auto;
-        	padding-top: 1.0rem !important;
-        	padding-left: 1.0rem !important;
-        }
-        
-        a {
-		    color: inherit; /* 링크 색상을 부모 요소의 색상으로 상속 */
-		    text-decoration: none; /* 밑줄 제거 */
-		}
-		
-		a:visited,
-		a:focus,
-		a:hover,
-		a:active  {
-			color: inherit;
-		    outline: none; /* 클릭 또는 포커스 시 외곽선 제거 */
-		    text-decoration: none; /* 밑줄 제거 */
-		}
-		
-		.name-set{
-			color:black;
-			font-size: 15px;
-			font-weight: 500;
-		}
-		
-		.price-set{
-			color:black;
-			font-size: 15px;
-			font-weight: 500;
-		}
-		
-		.info-set{
-			color: black !important;
-			font-weight: bold;
-		}
-        
-        .info-set2{
-			color: black !important;
-		}
-		
-		.flex-container {
-		    display: flex; /* Flexbox 레이아웃 사용 */
-		    justify-content: space-between; /* 요소 사이의 공간을 균등하게 배분하여 좌우 정렬 */
-		    align-items: center; /* 수직 정렬을 가운데로 설정 */
-		}
-		.flex-item {
-		    flex: 1; /* Flex item을 동일한 크기로 설정 */
-		}
-		.mb-3 img {
-		    width: 100%; /* 부모 요소에 맞게 이미지 너비를 100%로 설정 */
-		    height: auto; /* 이미지 높이 자동 조절 */
-		}
-		
-        </style>
     </head>
     
     <body class="main-bg-color">
+    <div id="qtlayer-up" class="qtlayer-up" style="display: flex; justify-content: center; align-items: center;">
+    <div style="text-align: center;">
+    <div style="display: inline-block;">
+        <a class="btn" href="storelist.do"><i data-feather="shopping-bag" style="font-size: 24px;"></i>상점</a>
+    </div>
+    <div class="separator"></div>
+    <div style="display: inline-block;">
+        <a class="btn" href="user_viewMap.do"><i data-feather="map-pin" style="font-size: 24px;"></i>지도</a>
+    </div>
+    <div class="separator"></div>
+    <div style="display: inline-block;" class="dropdown">
+    <button id="dropdownMenuButton" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button"><i data-feather="file-text" style="font-size: 24px;"></i>주문</button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    	<a class="dropdown-item" href=".do">주문현황</a>
+        <a class="dropdown-item" href="getreceipt.do">영수증</a>
+        </div>
+    </div>
+	</div>
+</div>
+
+<div id="empty"></div>
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
@@ -218,20 +162,7 @@
                 </main>
             </div>
             
-            <div id="layoutAuthentication_footer">
-                <footer class="footer-admin mt-auto footer-dark">
-                    <div class="container-xl px-4">
-                        <div class="row">
-                            <div class="col-md-6 small">Copyright &copy; Your Website 2021</div>
-                            <div class="col-md-6 text-md-end small">
-                                <a href="#!">Privacy Policy</a>
-                                &middot;
-                                <a href="#!">Terms &amp; Conditions</a>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
-            </div>
+            <div id="empty"></div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>

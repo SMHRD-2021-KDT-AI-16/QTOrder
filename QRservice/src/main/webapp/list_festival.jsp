@@ -241,7 +241,6 @@
 														<th class="border-gray-200" scope="col">시작일</th>
 														<th class="border-gray-200" scope="col">종료일</th>
 														<th class="border-gray-200" scope="col">상태</th>
-														<th class="border-gray-200" scope="col">수정</th>
 														<th class="border-gray-200" scope="col">삭제</th>
 													</tr>
 												</thead>

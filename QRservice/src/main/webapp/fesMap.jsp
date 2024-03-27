@@ -14,40 +14,10 @@
         <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
         <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
-        
-        <style type="text/css">
-        	#empty{
-        		width: 100%;
-        		height: 5%;
-        	}
-        	#map{
-        	
-        		width: 100%;
-        		height: 60%;
-        	}
-        	#waypoint_list{
-        		background-color:white;
-        		width: 100%;
-        		height: 35%;
-        		max-height: 35%;
-    			overflow-y: auto;
-        	}
-        	.way_loc{
-        		display: none;
-        	}
-        	.waydiv {
-    			display: inline-block;
-    			padding-left: 20px;
-    			padding-top: 30px;
-    			padding-bottom: 30px;
-			}
-			.dotOverlay {position:relative;bottom:10px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;font-size:12px;padding:5px;background:#fff;}
-.dotOverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}    
-.number {font-weight:bold;color:#ee6152;}
-.dotOverlay:after {content:'';position:absolute;margin-left:-6px;left:50%;bottom:-8px;width:11px;height:8px;background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white_small.png')}
-        </style>
+
     </head>
 <body style="background-color: #FA823C">
+<div id="toast" class="toast">현재 서비스는<br>테스트중인 서비스로<br>최단거리를 구해 알려주고 있기 때문에<br>참고로만 보시기 바랍니다.</div>
     <div id="qtlayer-up" class="qtlayer-up" style="display: flex; justify-content: center; align-items: center;">
     <div style="text-align: center;">
     <div style="display: inline-block;">
@@ -86,6 +56,10 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script type="text/javascript">
 window.onload = function() {
+	var toast = document.getElementById("toast");
+    toast.className = "toast show";
+    setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 5000);
+    
 	currentLocation();
 };
 

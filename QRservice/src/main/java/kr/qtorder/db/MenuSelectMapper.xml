@@ -40,8 +40,5 @@
 		where ft_idx = #{num};
 	</select>
 	
-	<select id="cartcheck" resultType="Integer" parameterType="String">
-    	SELECT EXISTS (SELECT 1 FROM tb_cart WHERE cust_phone = #{custPhone}) AS exists_flag
-	</select>
 	
 </mapper>

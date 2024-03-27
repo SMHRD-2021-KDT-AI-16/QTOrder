@@ -57,7 +57,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function() {
-	    // getParameterByName 함수 정의
+	    
 	    function getParameterByName(name, url) {
 	        if (!url) url = window.location.href;
 	        name = name.replace(/[\[\]]/g, '\\$&');

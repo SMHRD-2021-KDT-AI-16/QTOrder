@@ -11,6 +11,7 @@ public class FoodCartVO123 {
 	private String mo_name;
 	private int od_idx;
 	private String mo_notice;
+	private int cart_product_num;
 	
 	public int getFt_idx() {
 		return ft_idx;
@@ -42,6 +43,8 @@ public class FoodCartVO123 {
 	public String getMo_notice() {
 		return mo_notice;
 	}
-	
+	public int getCart_product_num() {
+		return cart_product_num;
+	}
 	
 }

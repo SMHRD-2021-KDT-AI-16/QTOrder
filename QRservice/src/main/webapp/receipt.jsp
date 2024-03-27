@@ -17,12 +17,6 @@
         <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
         
-        <style type="text/css">
-        	#empty{
-        		width: 100%;
-        		height: 5%;
-        	}
-        </style>
     </head>
     <%
     	List<ReceiptVO> receiptList = (List<ReceiptVO>) request.getServletContext().getAttribute("receiptList");
@@ -60,15 +54,6 @@
                     <div class="container-xl px-4 mt-4">
                        
                         <div id="receipt_list" class="row">
-                            <!-- <div class="col-lg-4 mb-4">
-                                <div class="card h-100 border-start-lg border-start-primary">
-                                    <div class="card-body">
-                                        <div class="small text-muted order_date">2024/01/01</div>
-                                        <div class="h3 order_name">얼음컵</div>
-                                        <div class="h3 order_price">1억</div>
-                                    </div>
-                                </div>
-                            </div> -->
                             
                         </div>
                     </div>
@@ -169,21 +154,13 @@
                 	        document.getElementById('cardForm').submit();
                 	    });
                 	});
+                	
+                	//window.addEventListener("popstate", function(event) { alert("뒤로가기 버튼이 클릭되었습니다!"); });
+                	
+                	//console.log("test ", history.length);
                 </script>
-                <footer class="footer-admin mt-auto footer-light">
-                    <div class="container-xl px-4">
-                        <div class="row">
-                            <div class="col-md-6 small">Copyright &copy; Your Website 2021</div>
-                            <div class="col-md-6 text-md-end small">
-                                <a href="#!">Privacy Policy</a>
-                                &middot;
-                                <a href="#!">Terms &amp; Conditions</a>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
             </div>
-        </div>
+        
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
     </body>

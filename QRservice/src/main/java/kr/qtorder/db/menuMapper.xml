@@ -16,7 +16,8 @@
 		left join tb_menu as b on a.menu_idx = b.menu_idx) as a
 		left join tb_menu_option as b on a.mo_idx = b.mo_idx) as a
 		left join tb_option_detail as b on a.od_idx = b.od_idx
-		where cust_phone = #{cust_phone};
+		where cust_phone = #{cust_phone}
+		order by order_idx desc;
 	</select>
 
 	<select id="getReceiptDetail" parameterType="kr.qtorder.model.ReceiptVO" resultType="kr.qtorder.model.ReceiptVO">
@@ -58,11 +59,11 @@
 	</insert>
 	
 	<select id="getCart" resultType="kr.qtorder.model.FoodCartVO123">
-		select a.ft_idx, ft_name, menu_idx, menu_name, menu_cnt, menu_price, a.mo_idx, mo_name, a.od_idx ,b.mo_notice
-		from (select a.cust_phone, menu_cnt, od_idx, a.menu_idx, menu_name, menu_price, ft_idx, ft_name, b.mo_name, b.mo_idx
-		from (select a.cust_phone, menu_cnt, mo_idx, od_idx, menu_idx, menu_name, menu_price, a.ft_idx, b.ft_name
-		from (select a.cust_phone, menu_cnt, mo_idx, od_idx, b.menu_name, menu_price, ft_idx, b.menu_idx
-		from (select a.*, b.menu_idx, menu_cnt, mo_idx, od_idx
+		select a.ft_idx, ft_name, menu_idx, menu_name, menu_cnt, menu_price, a.mo_idx, mo_name, a.od_idx ,b.mo_notice, a.cart_product_num
+		from (select a.cust_phone, menu_cnt, od_idx, a.menu_idx, menu_name, menu_price, ft_idx, ft_name, b.mo_name, b.mo_idx, a.cart_product_num
+		from (select a.cust_phone, menu_cnt, mo_idx, od_idx, menu_idx, menu_name, menu_price, a.ft_idx, b.ft_name, a.cart_product_num
+		from (select a.cust_phone, menu_cnt, mo_idx, od_idx, b.menu_name, menu_price, ft_idx, b.menu_idx, a.cart_product_num
+		from (select a.*, b.menu_idx, menu_cnt, mo_idx, od_idx, cart_product_num
 		from tb_cart as a
 		left join tb_cart_product as b on a.cart_num = b.cart_num
 		where cust_phone = #{cust_phone}) as a
@@ -78,6 +79,24 @@
 	<delete id="delete_cart">
 		delete from tb_cart where cust_phone = #{cust_phone}
 	</delete>
+	<delete id="delete_cartone">
+		delete from tb_cart_product where cart_product_num = #{cart_product_num}
+	</delete>
+	
+	<select id="cartcheck" resultType="Integer" parameterType="String">
+    	SELECT EXISTS (SELECT 1 FROM tb_cart WHERE cust_phone = #{custPhone}) AS exists_flag
+	</select>
+	
+	<select id="cart_product_check" parameterType="kr.qtorder.model.CartproductVO123" resultType="int">
+		SELECT EXISTS (SELECT 1 FROM tb_cart_product WHERE cart_num=#{cart_num} and menu_idx=#{menu_idx} and ft_idx = #{ft_idx} and mo_idx = #{mo_idx} and od_idx = #{od_idx}) AS exists_flag;
+	</select>
+	
+	<update id="cart_update_cnt" parameterType="kr.qtorder.model.CartproductVO123">
+		update tb_cart_product set menu_cnt = #{menu_cnt} where cart_num=#{cart_num} and menu_idx=#{menu_idx} and ft_idx = #{ft_idx} and mo_idx = #{mo_idx} and od_idx = #{od_idx}
+	</update>
+	<select id="get_ftnum" resultType="int">
+		select ft_idx from tb_cart_product where cart_num = #{cart_num} order by ft_idx limit 1;
+	</select>
 	
 	
 	<!-- 주문 매퍼 -->
@@ -86,7 +105,7 @@
 	</insert>
 	
 	<select id="getordernum" parameterType="kr.qtorder.model.OrderVO123" resultType="int">
-		select order_idx from tb_order where cust_phone=#{cust_phone} and ft_idx = #{ft_idx} and order_state = "대기";
+		select order_idx from tb_order where cust_phone=#{cust_phone} and ft_idx = #{ft_idx} and order_state = "대기" order by order_idx desc limit 1;
 	</select>
 	
 	<insert id="insert_order_detail" parameterType="kr.qtorder.model.Order_menuVO">

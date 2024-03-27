@@ -5,7 +5,6 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import kr.qtorder.db.CartDAO123;
 import kr.qtorder.model.CartproductVO123;
@@ -17,20 +16,15 @@ public class InsertCartFoodService implements Command {
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		HttpSession session = request.getSession();
-
 		CustomerVO customer = (CustomerVO) request.getServletContext().getAttribute("customerInfo");
 		String cust_phone = customer.getCust_phone();
+		
 		int ft_idx = Integer.parseInt(request.getParameter("ft_idx"));
-		System.out.println("2 : "+ft_idx);
 		int menu_idx = Integer.parseInt(request.getParameter("menu_idx"));
-		System.out.println("3 : "+menu_idx);
 		int menu_cnt = Integer.parseInt(request.getParameter("menu_cnt"));
-		System.out.println("4 : "+menu_cnt);
 		int mo_idx = Integer.parseInt(request.getParameter("mo_idx"));
-		System.out.println("5 : "+mo_idx);
 		int od_idx = Integer.parseInt(request.getParameter("od_idx"));
-		System.out.println("6 : "+od_idx);
+		
 		
 		CartDAO123 cdao = new CartDAO123();
 		
@@ -43,12 +37,19 @@ public class InsertCartFoodService implements Command {
 			cdao.insertCart(cust_phone);
 		}
 		
-
-			int cart_num = cdao.get_cart_num(cust_phone);
-			System.out.println("1 : "+cart_num);
-			CartproductVO123 cpvo = new CartproductVO123(cart_num, ft_idx, menu_idx, menu_cnt, mo_idx, od_idx);
-			System.out.println("cpvo : "+cpvo.getCart_num());
-			cdao.insertCartproduct(cpvo);
+		int cart_num = cdao.get_cart_num(cust_phone);
+		
+		CartproductVO123 cpvo = new CartproductVO123(cart_num, ft_idx, menu_idx, menu_cnt, mo_idx, od_idx);
+		// 카트식별자, 메뉴 인덱스, 매장식별자가 같은게 있는지 보고
+		
+		int yn2 = cdao.cart_product_check(cpvo);
+		if(yn2 == 1) {
+			//같은게 있다면 update구문으로 cnt만 업데이트
+			cdao.update_cartproduct(cpvo);
+		}else {
+			// 같은게 없다면 넣기
+			cdao.insertCartproduct(cpvo);			
+		}
 			
 		return "cus_choice_menu.do?num="+ft_idx;
 	}
