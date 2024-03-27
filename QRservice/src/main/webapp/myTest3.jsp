@@ -463,7 +463,7 @@
                                            						 src = '${ session_img }/<%= files[0].getName() %>' >
 					                                        <div class="ms-4">
 					                                            <div class="small">
-					                                            	<%= listMenuVO.get(i).getMenu_name() %>
+					                                            	<h3><%= listMenuVO.get(i).getMenu_name() %></h3>
 					                                            </div>
 					                                        </div>
 					                                    </div>
@@ -691,7 +691,7 @@
 	                               		src = 'http://localhost:8082/QRservice/assets/img/hotdog/main1.jpg' >
 	                               	<div class="ms-4">
 	                               		<div class="small">
-	                               			\${ temp }
+	                               			<h3>\${ temp }</h3>
 	                               		</div>
 	                               	</div>
 	                             </div>

@@ -206,8 +206,7 @@
 			    display: flex; /* 이 컨테이너 내의 항목들을 가로로 배열 */
 			    justify-content: center; /* 버튼들을 중앙에 정렬 */
 			    gap: 10px; /* 버튼 사이의 간격 설정 */
-			}
-			
+			}			
 			div.flip-card.show {
 			  opacity: 1 !important;
 			  transform: scale(1) !important;

@@ -67,6 +67,13 @@ public class TestDAO {
 		return result;		
 	}
 	
+	public int changeOrderStatus(HashMap<String, Object> map) {
+		SqlSession sqlsession = factory.openSession(true);
+		int result = sqlsession.update("changeOrderStatus", map);
+		sqlsession.close();
+		return result;		
+	}
+	
 	public List<HashMap<String, Object>> selectOrderList() {
 		SqlSession sqlsession = factory.openSession(true);		
 		//List<HashMap<String, Object>> list = (List) sqlsession.selectList("selectOrderList");
