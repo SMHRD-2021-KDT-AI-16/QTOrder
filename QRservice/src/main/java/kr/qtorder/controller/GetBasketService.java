@@ -19,7 +19,7 @@ public class GetBasketService implements Command{
 			throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		CustomerVO customer = (CustomerVO) session.getAttribute("customerInfo");
+		CustomerVO customer = (CustomerVO) request.getServletContext().getAttribute("customerInfo");
 		String cust_phone = customer.getCust_phone();
 		
 		MenuDetail123DAO mddao = new MenuDetail123DAO();

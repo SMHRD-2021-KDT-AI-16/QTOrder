@@ -25,7 +25,7 @@
         </style>
     </head>
     <%
-    	List<ReceiptVO> receiptList = (List<ReceiptVO>) request.getAttribute("receiptList");
+    	List<ReceiptVO> receiptList = (List<ReceiptVO>) request.getServletContext().getAttribute("receiptList");
     	String jsonData = new Gson().toJson(receiptList);
     %>
     <body style="background-color: #FA823C">
@@ -75,6 +75,7 @@
                 </main>
                 <script type="text/javascript">
                 	var receiptData = <%= jsonData %>;                	
+                	console.log("re ",receiptData);
                 	
                 	for(let i = 0; i < receiptData.length; i++){
                 		
@@ -89,6 +90,7 @@
                 			date = receiptData[i].ordered_at;
                 			name = receiptData[i].menu_name;
                 			value = receiptData[i].order_idx;
+                			console.log("1 ",price," 2 ",date);
                 		}else{
                 			// 여러개일 때
                 			price = price + (receiptData[i].menu_price*receiptData[i].menu_cnt);
@@ -118,12 +120,13 @@
                 			if(i == receiptData.length){
                 				break;
                 			}
-	                	viewReceipt(date, name, price, value);
                 		}
+	                	viewReceipt(date, name, price, value);
                 	}
                 	
                 	
                 	function viewReceipt(date, name, price, value){
+                		console.log("1t ",price," 2t ",date);
                 		const receipt_list = document.getElementById("receipt_list");
                 		
                 		const div1 = document.createElement("div");

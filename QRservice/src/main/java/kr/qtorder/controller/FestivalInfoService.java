@@ -31,7 +31,7 @@ public class FestivalInfoService implements Command{
 		List<FestivalVO> fesinfo = new ArrayList<FestivalVO>();
 		
 		fesinfo = dao.selectFestival();
-		session.setAttribute("selectFestival", fesinfo);
+		request.getServletContext().setAttribute("selectFestival", fesinfo);
 		
 		
 		// 푸드트럭 모든 리스트

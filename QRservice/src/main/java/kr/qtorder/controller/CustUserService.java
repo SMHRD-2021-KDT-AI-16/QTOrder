@@ -45,7 +45,7 @@ public class CustUserService implements Command {
 		jsonObject2 = jsonObject2.getJSONObject("response");
 		
 		HttpSession session = request.getSession();
-		CustomerVO existingCustomer = (CustomerVO) session.getAttribute("customerInfo");
+		CustomerVO existingCustomer = (CustomerVO) request.getServletContext().getAttribute("customerInfo");
 		
 		// 현재 로그인이 안되어있다면
 		if (existingCustomer == null) {
@@ -67,9 +67,11 @@ public class CustUserService implements Command {
 			if(cvo2 == null) {
 				System.out.println("test4");
 				cdao.insertCust(cvo);
-				session.setAttribute("customerInfo", cvo);
+				request.getServletContext().setAttribute("customerInfo", cvo);
+				//session.setAttribute("customerInfo", cvo);
 			}
-			session.setAttribute("customerInfo", cvo2);
+			request.getServletContext().setAttribute("customerInfo", cvo2);
+			//session.setAttribute("customerInfo", cvo2);
 			System.out.println("check"+cvo2.getCust_phone());
 			
 		}

@@ -24,13 +24,15 @@ public class SMSService implements Command{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("test");
-
+		String cust_phone = ""; // 고객 번호
+		String bus_phone = ""; // 업자 번호
+		String waitingTime = "";
+		
 		Message message = new Message();
             // 발신번호 및 수신번호는 반드시 01012345678 형태로 입력되어야 합니다.
-        message.setFrom("01071517965");
-        message.setTo("01071517965");
-        message.setText("주문하신 음식이 조리완료되었습니다.");
+        message.setFrom(cust_phone);
+        message.setTo(bus_phone);
+        message.setText("주문하신 음식이 조리를 시작했습니다. 예상 조리시간은."+waitingTime+"입니다.");
 
         SingleMessageSentResponse responsemsg = this.messageService.sendOne(new SingleMessageSendingRequest(message));
         System.out.println(responsemsg);

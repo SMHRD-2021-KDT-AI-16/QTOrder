@@ -19,7 +19,7 @@
 <body style="background-color: #FA823C">
 <%
     String clientId = "LbSKpthI2uLCgKvmUEpp";//애플리케이션 클라이언트 아이디값";
-    String redirectURI = URLEncoder.encode("http://localhost:8081/QRservice/storelist.jsp", "UTF-8");
+    String redirectURI = URLEncoder.encode("http://127.0.0.1:8081/QRservice/storelist.jsp", "UTF-8");
     SecureRandom random = new SecureRandom();
     String state = new BigInteger(130, random).toString();
     String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code"
@@ -36,7 +36,7 @@
 						<div class="col-lg-5">							
 							<div class="card shadow-lg border-0 rounded-lg mt-5">
 								<div class="card-header justify-content-center">
-									<h3 class="fw-light my-4">${fesname.getFes_name()}</h3>
+									<h3 id="fes_name" class="fw-light my-4"><%-- ${fesname.fes_name} --%></h3>
 								</div>
 								<div class="card-body">
 									<form>
@@ -76,7 +76,9 @@
 			url : 'http://localhost:8081/QRservice/getfes_name.do?fes_idx='+fesIdxValue,
 
 			success : function(result) {
-
+				
+				console.log("resutl : ",result);
+				document.getElementById("fes_name").innerText = result.fes_name;
 			},
 			error : function() {
 
@@ -84,7 +86,6 @@
 		});
 	    
 	});
-
 	
 	</script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

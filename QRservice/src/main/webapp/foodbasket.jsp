@@ -5,7 +5,7 @@
 <html>
     <head>
      <%
-	CustomerVO customerInfo = (CustomerVO)session.getAttribute("customerInfo");
+	CustomerVO customerInfo = (CustomerVO)request.getServletContext().getAttribute("customerInfo");
     String cust_name = customerInfo.getCust_name();
     String cust_phone = customerInfo.getCust_phone();
 	%>

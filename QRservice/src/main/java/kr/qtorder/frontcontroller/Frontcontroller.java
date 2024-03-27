@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.qtorder.controller.AddFestivalService;
 import kr.qtorder.controller.Bus_check2Service;
+import kr.qtorder.controller.ChangeOrderStatus2Service;
+import kr.qtorder.controller.ChangeOrderStatusService;
 import kr.qtorder.controller.Command;
 import kr.qtorder.controller.CustUserService;
 import kr.qtorder.controller.FesAddListDeleteService;
@@ -70,8 +72,6 @@ public class Frontcontroller extends HttpServlet {
 		map.put("fes.do", new AddFestivalService());
 		map.put("getFes_List.do", new GetFesListService());
 		map.put("custuser.do", new CustUserService());
-		map.put("getreceipt.do", new ReceiptCheckService());
-		map.put("getreceiptdetail.do", new GetReceiptDetailService());
 		map.put("cus_choice_menu.do", new MenuSelectService());
 		map.put("user_viewMap.do", new GetuserfesLocService());
 		map.put("bus_check2.do", new Bus_check2Service());
@@ -84,7 +84,17 @@ public class Frontcontroller extends HttpServlet {
 		map.put("getbasket.do", new GetBasketService());
 		map.put("getprice.do", new GetPriceService());
 		map.put("getmenudetail.do", new GetMenuDetailService());
+		
+		//영수증 관련
+		map.put("getreceipt.do", new ReceiptCheckService());
+		map.put("getreceiptdetail.do", new GetReceiptDetailService());
+		
+		// 카트(장바구니 관련)
 		map.put("insertCart.do", new InsertCartFoodService());
+		
+		// 주문 관련
+		map.put("changeOrderStatus.do", new ChangeOrderStatusService());
+		map.put("changeOrderStatus2.do", new ChangeOrderStatus2Service());
 	}
 	
     @Override

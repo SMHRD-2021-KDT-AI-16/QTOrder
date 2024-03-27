@@ -23,7 +23,7 @@ public class GetFesListService implements Command{
 		
 		HttpSession session = request.getSession();
 		FestivalDAO fdao = new FestivalDAO();
-		String admin_id = (String)session.getAttribute("loginId");
+		String admin_id = (String)request.getServletContext().getAttribute("loginId");
 		
 		List<Festival_infoVo> list = fdao.getFes_List(admin_id);
 		

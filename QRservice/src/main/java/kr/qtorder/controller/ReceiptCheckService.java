@@ -20,7 +20,7 @@ public class ReceiptCheckService implements Command{
 
 		HttpSession session = request.getSession();
 
-		CustomerVO customer = (CustomerVO) session.getAttribute("customerInfo");
+		CustomerVO customer = (CustomerVO) request.getServletContext().getAttribute("customerInfo");
 		String cust_phone = customer.getCust_phone();
 		
 		ReceiptDAO rdao = new ReceiptDAO();
@@ -28,7 +28,7 @@ public class ReceiptCheckService implements Command{
 		
 		if(list != null) {
 			System.out.println("test : "+list);
-			request.setAttribute("receiptList", list);
+			request.getServletContext().setAttribute("receiptList", list);
 		}else {
 			System.out.println("없음");
 		}
