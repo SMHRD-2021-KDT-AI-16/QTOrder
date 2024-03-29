@@ -48,7 +48,7 @@ public class CreateOrderList extends HttpServlet {
 			json.put("ft_name", map.get("ft_name"));
 			json.put("order_state", map.get("order_state"));
 			json.put("menu_cnt", map.get("menu_cnt"));
-			
+			json.put("menu_img", map.get("menu_img"));
 			jarray.add(json);
 		}
 		

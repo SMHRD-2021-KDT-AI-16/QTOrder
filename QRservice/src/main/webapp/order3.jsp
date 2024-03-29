@@ -373,9 +373,13 @@
               0 0 0 1px rgba(0,0,0,0.4);
       }
 		.polaroid {
+			
 			background: #fff;
 			padding: 1rem;
 			box-shadow: 0 0.25rem 1rem rgba(0,0,0,0.2);
+		}
+		.polaroid img {
+			width: 100%;
 		}
 		.caption {
 			font-size: 1.125rem;
@@ -384,6 +388,7 @@
 			color: black;
 		}
 		.item {
+			width: 100%;
 		  display: inline-block;
 		  margin-top: 2rem;
 		  filter: grayscale(100%);
@@ -727,14 +732,14 @@
             </div>
             <div id="layoutSidenav_content">
                 <div style="background-color:#bcaaa4; display: flex;">                                       
-                    <div id="order-menu-list" style="min-width: 450px; color: #ffffff; background-color:#355e3b; flex: 1; position: relative; z-index: 1000; min-height: 100vh">
+                    <div id="order-menu-list" style="min-width: 300px; color: #ffffff; background-color:#355e3b; flex: 1; position: relative; z-index: 1000; min-height: 100vh">
                                              
                     </div>
                     <div style="flex: 3; display: flex; flex-direction: column; min-height: 100vh;">
                           <div class="px-4 mt-5" style="flex: 1; display: flex; flex-direction: column;">
                              <div id="app" class="vue-container" style="flex: 1;" :style="{ 'transform': `translateX(\${translateX}px)` }">                     
                         <card v-for="(order, index) in orders" :key="order.order_idx" :translate-x="translateX" @click.native="moveCardToFirst(index, order.order_idx)"
-                                     data-image="https://media.istockphoto.com/id/157479378/ko/%EC%82%AC%EC%A7%84/%ED%95%AB%EB%8F%84%EA%B7%B8-%EB%A8%B8%EC%8A%A4%ED%84%B0%EB%93%9C%EC%99%80-%EC%BC%80%EC%B2%A9.jpg?s=612x612&w=0&k=20&c=108PFIu9ndXIOMoI7seKRti7ge3-s0Us2iay6duRRAM=">
+                                     :data-image="'assets/img/hotdog/' + order.menu_img">
                
                            <div slot="number" class="corner-tag"> {{order.order_idx}}</div>    
                                     <div slot="state" class="corner-tag2" :class="{
@@ -742,9 +747,9 @@
                              'completed': order.order_state === '완료'}"> {{order.order_state}}</div>                    
                                     <h1 slot="header" style="display: flex">{{order.menu_name}}</h1>
                                     <p slot="content">외 {{order.order_cnt - 1}}건</p>
-                              </card>
+                     	</card>
                      </div>
-                     <div style="background:none; flex: 0; position: relative;">                            
+                     <div style="background:none; flex: 0; position: relative; z-index: 100;">                            
                                 <div id="moveCardLeftButton" class="arrow01" style="position: fixed; left: 16%; bottom: 10%;"></div>
                                 <div id="moveCardRightButton" class="arrow02" style="position: fixed; right: 5%; bottom: 10%;"></div>
                                 <button id="startButton" class="btn-3d green" style="position: fixed; left: 25%; bottom: 10%;">LEARN MORE</button>
@@ -807,7 +812,7 @@
                       </div>
                   </div>
                </div>`,
-         mounted() {
+           mounted() {
                this.width = this.$refs.card.offsetWidth;
                this.height = this.$refs.card.offsetHeight;
            },
@@ -849,12 +854,14 @@
            methods: {
               handleMouseMove(e) {             
                   this.mouseX = e.pageX - this.$refs.card.offsetLeft - this.width/2 - 270 - this.translateX;
-                  this.mouseY = e.pageY - this.$refs.card.offsetTop - this.height/2 - 60 - 80;
+                  this.mouseY = e.pageY - this.$refs.card.offsetTop - this.height/2;
                   if(this.mouseX <= -180) this.mouseX = -180;
                   if(this.mouseX >= 180) this.mouseX = 180;
               
-               //console.log("this.$refs.card.offsetLeft")
-               //console.log(this.$refs.card.offsetLeft)
+                  console.log("this.height")
+                  console.log(this.height)
+               	  console.log("this.mouseY")
+                  console.log(this.mouseY)
                 },
                 handleMouseEnter() {
                   clearTimeout(this.mouseLeaveDelay);
@@ -891,7 +898,7 @@
                        this.orders = data;
                        const orderIds = [...new Set(data.map(order => order.order_idx))];
                        this.order_num = orderIds;
-                       console.log(data)  
+                       console.log("data", data)  
                     },
                     error: () => {
                        console.log("error");
@@ -936,7 +943,7 @@
                        for(let i = 0; i < data.length; i++) {
                           element += `
                         	  <div class="item">
-                        	    <div class="polaroid"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/dXAhQuT.jpg">
+                        	    <div class="polaroid"><img src="assets/img/hotdog/\${data[i].menu_img}">
                         	      <div class="caption"> \${ data[i].menu_name } \${ data[i].menu_cnt}개 </div>
                                   <div class="caption"> \${ data[i].mo_name } : \${ data[i].mo_notice }</div>
                         	    </div>
