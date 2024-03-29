@@ -18,7 +18,7 @@
            position: absolute;
            width: 100%;
            height: 100%;
-           text-transform: uppercase;
+           /* text-transform: uppercase; */
            animation: stroke 5s 1 alternate;
            fill: #FA823C;
            opacity: 0;

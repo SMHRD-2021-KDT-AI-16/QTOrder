@@ -45,7 +45,7 @@ public class FoodTruckDAO {
 	   
 	  public FtImgVO loadImg(FtImgVO vo) {
 	      SqlSession session = factory.openSession(true);
-	      System.out.println("test loadimg");
+	      
 	      FtImgVO loadImg = session.selectOne("loadImg", vo);
 	      
 	      session.close();

@@ -41,10 +41,10 @@
                 <main>
                     <div class="container-xl px-4 mt-4">
                         <div class="card invoice">
-                            <div class="card-header p-4 p-md-5 border-bottom-0 bg-gradient-primary-to-secondary text-white-50">
+                            <div class="card-header p-4 p-md-5 border-bottom-0 text-white-50">
                                 <div class="row justify-content-between align-items-center">
                                     <div class="col-12 col-lg-auto mb-5 mb-lg-0 text-center text-lg-start">
-                                        <img class="" src="${menuDetail.get(0).getMenu_img()}" alt="" />
+                                        <img class="" src="${menuDetail.get(0).getMenu_img()}" alt="" style="width: 100%; height: 100%" />
                                     </div>
                                 </div>
                             </div>

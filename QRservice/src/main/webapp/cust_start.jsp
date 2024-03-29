@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Insert title here</title>
+    <title></title>
     <style>    
        body {
            display: flex;
@@ -156,7 +156,7 @@
     
     <script type="text/javascript">
         setTimeout(function() {
-            window.location.href = "cust_login.jsp";
+            window.location.href = "http://127.0.0.1:8081/QRservice/cust_login.jsp?fes_idx=10";
         }, 6000);
     </script>
 </body>

@@ -251,7 +251,7 @@
                                     <div class="card-body">
                                         <div class="d-flex align-items-center" class="image-show" id="image-show">
                                            <% if(files.length > 0) { %>
-                                           <img width = "800px" height = "450px" class = 'image-thumnail' 
+                                           <img style=" width : 190px; height : 100px;" class = 'image-thumnail' 
                                            		<%-- src = '<%= filePath + files[0].getName() %>' > --%>
                                            		src = 'assets/img/hotdog/main1.jpg' >
                                            <% } %>
@@ -265,8 +265,10 @@
                                     <div class="card-body">
                                         <div class="d-flex align-items-center">         
                                            <% if(files.length > 1) { %>                                   
-										   <img width = "800px" height = "450px" class = 'image-thumnail' 
-										   		src = '${ session_img }/<%= files[1].getName() %>' >	
+										   <%-- <img width = "800px" height = "450px" class = 'image-thumnail' 
+										   		src = '${ session_img }/<%= files[1].getName() %>' >	 --%>
+										   		<img style=" width : 190px; height : 100px;" class = 'image-thumnail' 
+										   		src = 'assets/img/hotdog/truck2.png' >
 										   <% } %>										                                           
                                         </div>
                                     </div>
@@ -278,8 +280,8 @@
                                     <div class="card-body">
                                         <div class="d-flex align-items-center">
                                            <% if(files.length > 2) { %>
-                                           <img width = "800px" height = "450px" class = 'image-thumnail' 
-                                        		src = '${ session_img }/<%= files[2].getName() %>' >	   
+                                           <img style=" width : 190px; height : 100px;" class = 'image-thumnail' 
+										   		src = 'assets/img/hotdog/truck3.jpg' >	   
                                            <% } %>                                         
                                         </div>
                                     </div>
@@ -291,8 +293,8 @@
                                     <div class="card-body">
                                         <div class="d-flex align-items-center">
                                            <% if(files.length > 3) { %>
-                                           <img width = "800px" height = "450px" class = 'image-thumnail'
-                                              src = '${ session_img }/<%= files[3].getName() %>' >	
+                                           <img style=" width : 190px; height : 100px;" class = 'image-thumnail' 
+										   		src = 'assets/img/hotdog/truck4.jpg' >	
                                            <% } %>
                                         </div>
                                     </div>

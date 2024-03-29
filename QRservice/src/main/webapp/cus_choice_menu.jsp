@@ -93,7 +93,7 @@
 	                                            <div class="mb-3 price-set">${b.menu_price}원</div>
                                             </div>
                                             <div class="flex-item">
-	                                            <div class="mb-3"><img alt="대표메뉴 사진" src="assets/img/hotdog.jpg"><%-- <img alt="대표메뉴 사진" src="${b.menu_img}"> --%></div>
+	                                            <div class="mb-3"><img alt="대표메뉴 사진" src="${b.menu_img}"><%-- <img alt="대표메뉴 사진" src="${b.menu_img}"> --%></div>
                                             </div>
                                         </form>
                                     </div>
@@ -148,7 +148,7 @@
 		                                            <div class="mb-3 price-set"><%=all.getMenu_price()%>원</div>
 	                                        	</div>
 	                                        	<div class="flex-item">
-		                                            <div class="mb-3"><img alt="메뉴 사진" src="assets/img/hotdog.jpg"><%-- <img alt="메뉴 사진" src="<%=all.getMenu_img()%>"> --%></div>
+		                                            <div class="mb-3"><img alt="메뉴 사진" src="<%= all.getMenu_img()%>" style="width: 150px; height: 150px"><%-- <img alt="메뉴 사진" src="<%=all.getMenu_img()%>"> --%></div>
 	                                        	</div>
 	                                        </form>
 	                                    </div>
