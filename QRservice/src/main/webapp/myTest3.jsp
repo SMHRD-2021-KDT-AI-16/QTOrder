@@ -130,7 +130,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Affiliate Dashboard - SB Admin Pro</title>
+        <title></title>
         <link href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
@@ -463,7 +463,7 @@
                                            						 src = '${ session_img }/<%= files[0].getName() %>' >
 					                                        <div class="ms-4">
 					                                            <div class="small">
-					                                            	<%= listMenuVO.get(i).getMenu_name() %>
+					                                            	<h3><%= listMenuVO.get(i).getMenu_name() %></h3>
 					                                            </div>
 					                                        </div>
 					                                    </div>
@@ -691,7 +691,7 @@
 	                               		src = 'http://localhost:8082/QRservice/assets/img/hotdog/main1.jpg' >
 	                               	<div class="ms-4">
 	                               		<div class="small">
-	                               			\${ temp }
+	                               			<h3>\${ temp }</h3>
 	                               		</div>
 	                               	</div>
 	                             </div>

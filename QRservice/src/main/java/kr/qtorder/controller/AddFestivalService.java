@@ -21,11 +21,8 @@ public class AddFestivalService implements Command{
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		//HttpSession session = request.getSession();
+		String admin_id = (String) request.getServletContext().getAttribute("loginId");
 
-		AdminVO123 admin = (AdminVO123) request.getServletContext().getAttribute("admin");
-		String admin_id = admin.getAdmin_id();
-		//String admin_id = "admin";
 		String fes_name = request.getParameter("fes_name");
 		String fes_start = request.getParameter("fes_start");
 		String fes_end = request.getParameter("fes_end");
@@ -65,7 +62,7 @@ public class AddFestivalService implements Command{
 		if(fes_loc_num != 0) { // 만약 구역설정을 했다면
 			
 			// 축제식별자를 가져와야함
-			int fes_idx = Integer.parseInt(fdao.Festival_loc(fes_name));
+			int fes_idx = fdao.Festival_loc(fes_name);
 			System.out.println("test : "+fes_idx);
 			// 그 축제 식별자에 부스 위치 넣기
 			for(int i = 1; i <= fes_loc_num; i++) {
@@ -87,7 +84,7 @@ public class AddFestivalService implements Command{
 			}
 		}
 		
-		return null;
+		return "list_festival.jsp";
 	}
 	
 }

@@ -45,6 +45,10 @@
 		update tb_menu set menu_main = 0 where menu_name = #{menu_name};
 	</update>
 	
+	<update id="changeOrderStatus" parameterType="hashmap" >		
+		update tb_order set order_state = #{ order_state } where order_idx = #{ order_idx };
+	</update>
+		
 	<select id="selectOrderList" parameterType = 'kr.qtorder.model.MenuVO'  resultType = 'hashmap'  >
 		select A.order_idx, B.menu_name, A.menu_cnt, B.menu_price, D.ft_name, C.order_state  
 		from tb_order_menu A
@@ -99,4 +103,6 @@
 		    on B.mo_idx = C.mo_idx
 		where A.menu_idx = #{ menu_idx };
 	</select>
+	
+	
 </mapper>

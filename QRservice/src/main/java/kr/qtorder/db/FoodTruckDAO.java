@@ -14,11 +14,10 @@ public class FoodTruckDAO {
 	private SqlSessionFactory factory = SqlSessionManager.getFactory();
 	
 	public List<FoodTruckVO> selectFoodTruck() {
-		System.out.println("test2");
+		
 		SqlSession session = factory.openSession(true);
 		List<FoodTruckVO> f_list = session.selectList("selectFoodTruck");
-		System.out.println("f_list : "+f_list);
-		System.out.println("test3");
+		
 		session.close();
 		
 		return f_list;

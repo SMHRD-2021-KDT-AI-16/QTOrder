@@ -9,7 +9,7 @@
 	<insert id="insert_festival" parameterType="kr.qtorder.model.Festival_infoVo">
 		insert into tb_festival (fes_name, fes_start, fes_end, admin_id) values (#{fes_name}, #{fes_start, jdbcType=DATE}, #{fes_end, jdbcType=DATE},#{admin_id});
 	</insert>
-	<select id="get_fes_idx" parameterType="String" resultType="String">
+	<select id="get_fes_idx" parameterType="String" resultType="int">
 		SELECT fes_idx from tb_festival where fes_name = #{fes_name}
 	</select>
 	
@@ -18,7 +18,7 @@
 	</insert>
 	
 	<select id="get_fes_list" parameterType="String" resultType="kr.qtorder.model.Festival_infoVo">
-		select * from tb_festival where admin_id = #{admin_id}
+		select * from tb_festival where admin_id = #{admin_id} order by fes_start asc;
 	</select>
 	
 	<select id="get_fes" resultType="kr.qtorder.model.FesVO">

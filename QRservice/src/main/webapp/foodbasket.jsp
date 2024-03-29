@@ -17,7 +17,7 @@
         <title>QTOrder</title>
         <link href="css/styles.css" rel="stylesheet" />
         <link href="css/yg.css" rel="stylesheet" />
-        <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
+        <link rel="icon" type="image/x-icon" href="assets/img/logo_small.png" />
         <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
     </head>
@@ -91,8 +91,28 @@
 			</main>
 			<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 			
-    
         <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // 모든 price-set 클래스를 가진 요소를 선택합니다.
+            var priceElements = document.querySelectorAll('.small.text-muted');
+
+            // 각 요소에 대해 루프를 돌면서 가격을 변환합니다.
+            priceElements.forEach(function(element) {
+                // 요소의 텍스트를 가져옵니다.
+                var priceString = element.innerText;
+
+                // 문자열에서 '원' 문자열을 제거하고 ','를 모두 제거한 후 숫자로 변환합니다.
+                var price = parseInt(priceString.replace('원', '').replace(/,/g, ''));
+
+                // 한국 통화 형식으로 숫자를 변환합니다.
+                var formattedPrice = price.toLocaleString("ko-KR");
+
+                // 변환된 가격을 요소의 텍스트로 설정합니다.
+                element.innerText = formattedPrice + '원';
+            });
+        });
+        
+        
         var IMP = window.IMP; // 생략가능
 		IMP.init("imp50200865");
 
@@ -131,45 +151,42 @@
 					let quantityElement = btn_id.previousElementSibling; // 이전 형제 엘리먼트를 선택
 					let num = parseInt(quantityElement.innerText);
 
-					let money = parseInt(btn_id.nextElementSibling.innerText);
-
+					let money = parseInt(btn_id.nextElementSibling.innerText.replace("원","").replace(",",""));
+					console.log("moeny_p : ",money);
+					console.log("num_p : ",num);
 					money = money / num;
 					num = num + 1;
 
 					quantityElement.innerText = num;
 
 					money = money * num;
-					btn_id.nextElementSibling.innerText = money;
+					var Price = money.toLocaleString("ko-KR");
+					btn_id.nextElementSibling.innerText = Price+"원";
 
 					total_money();
 					
-					$.ajax({
-    					url: '',
-    					
-    					success: function (result) {
-    						
-    					},
-    					error: function(){
-    				
-    					}
-    	  		    });
 				}
 
 
 				function minus_food_num(btnid) {
 
 					let btn_id = document.getElementById(btnid);
-					let money = parseInt(btn_id.parentNode.querySelector('.small.text-muted').innerText);
+					let money = parseInt(btn_id.parentNode.querySelector('.small.text-muted').innerText.replace("원","").replace(",",""));
 
 					let quantityElement = btn_id.nextElementSibling;
 
 					let num = parseInt(quantityElement.innerText);
+					console.log("moeny : ",money);
+					console.log("num : ",num);
 					if (num > 1) {
 						money = money / num;
 						num = num - 1;
 						money = money * num;
 						quantityElement.innerText = num;
-						btn_id.parentNode.querySelector('.small.text-muted').innerText = money;
+						var Price = money.toLocaleString("ko-KR");
+
+						btn_id.parentNode.querySelector('.small.text-muted').innerText = Price+"원";
+						
 						total_money();
 					}
 				}
@@ -180,11 +197,10 @@
 					let total_money = 0;
 
 					for (let i = 0; i < moneys.length; i++) {
-						total_money = total_money
-								+ parseInt(moneys[i].innerText);
+						total_money = total_money + parseInt(moneys[i].innerText.replace(",","").replace("원",""));
 					}
-
-					document.getElementById("total_money").innerText = "총 결제 금액 : "+ total_money + "원";
+					var Price = total_money.toLocaleString("ko-KR");
+					document.getElementById("total_money").innerText = "총 결제 금액 : "+ Price + "원";
 
 				}
 

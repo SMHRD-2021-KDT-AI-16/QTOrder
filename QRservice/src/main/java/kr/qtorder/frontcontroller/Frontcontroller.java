@@ -45,6 +45,7 @@ import kr.qtorder.controller.NoticeCreateService;
 import kr.qtorder.controller.NoticeDeleteService;
 import kr.qtorder.controller.NoticeEditService;
 import kr.qtorder.controller.NoticeListSelectService;
+import kr.qtorder.controller.OrderStateNowService;
 import kr.qtorder.controller.ReceiptCheckService;
 import kr.qtorder.controller.SMSService;
 import kr.qtorder.controller.StoreSelectService;
@@ -61,32 +62,36 @@ public class Frontcontroller extends HttpServlet {
 		
 		super.init();
 		
-		map.put("storelist.do", new StoreSelectService());
+		// 관리자
 		map.put("fesAdminPage.do", new FestivalInfoService());
 		map.put("fesAdminJoin.do", new FesMemberJoinService());
-		map.put("IdCheck.do", new FesAdminidCheckService());
 		map.put("fesAdminLogin.do", new FesLoginService());
+		map.put("IdCheck.do", new FesAdminidCheckService());
+		map.put("addList.do", new FesAddListService());
+		map.put("deleteList.do", new FesAddListDeleteService());
+		map.put("fes.do", new AddFestivalService());
+		map.put("getFes_List.do", new GetFesListService());
+		map.put("moveQR.do", new GetfesQRService());
+		map.put("getfesdate.do", new GetfesDateService());
+		map.put("getfes_name.do", new getFesNameService());
+		
+		// 사업자
 		map.put("noticeList.do", new NoticeListSelectService());
 		map.put("noticeCreate.do", new NoticeCreateService());
 		map.put("noticeEdit.do", new NoticeEditService());
 		map.put("noticeDelete.do", new NoticeDeleteService());
-		map.put("addList.do", new FesAddListService());
-		map.put("deleteList.do", new FesAddListDeleteService());
 		map.put("fd_join.do", new Foodtruck_joinService());
 		map.put("fd_login.do", new Foodtruck_loginService());
-		map.put("fes.do", new AddFestivalService());
-		map.put("getFes_List.do", new GetFesListService());
+		map.put("bus_check2.do", new Bus_check2Service());
+		
+		// 고객
+		map.put("storelist.do", new StoreSelectService());
 		map.put("custuser.do", new CustUserService());
 		map.put("cus_choice_menu.do", new MenuSelectService());
 		map.put("user_viewMap.do", new GetuserfesLocService());
-		map.put("bus_check2.do", new Bus_check2Service());
-		map.put("getfesti_loc.do", new GetfestiLocService());
-		map.put("getfesdate.do", new GetfesDateService());
-		map.put("postmsg.do", new SMSService());
-		map.put("getfes_name.do", new getFesNameService());
-		map.put("moveQR.do", new GetfesQRService());
-		map.put("getprice.do", new GetPriceService());
 		map.put("getmenudetail.do", new GetMenuDetailService());
+		map.put("getprice.do", new GetPriceService());
+		map.put("getfesti_loc.do", new GetfestiLocService());
 		
 		//영수증 관련
 		map.put("getreceipt.do", new ReceiptCheckService());
@@ -105,6 +110,10 @@ public class Frontcontroller extends HttpServlet {
 		map.put("dummy.do", new DummyService());
 		map.put("changeOrderStatus.do", new ChangeOrderStatusService());
 		map.put("changeOrderStatus2.do", new ChangeOrderStatus2Service());
+		map.put("order_state.do", new OrderStateNowService());
+		
+		
+		map.put("postmsg.do", new SMSService());		
 	}
 	
     @Override

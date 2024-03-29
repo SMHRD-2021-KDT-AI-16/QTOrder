@@ -27,7 +27,7 @@ public class FesLoginService implements Command {
 		FesMemberVO result = dao.login(vo);
 		
 		if (result != null) {
-			HttpSession session = request.getSession();
+			
 			request.getServletContext().setAttribute("loginId", result.getAdmin_id());
 			
 			System.out.println("로그인 성공");

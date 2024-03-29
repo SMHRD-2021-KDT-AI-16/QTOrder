@@ -26,7 +26,7 @@ img {
 	<script type="text/javascript">
 		setTimeout(function() {
 			window.location.href = "cust_login.jsp";
-		},3000);
+		},1000);
 		
 	</script>
 </body>

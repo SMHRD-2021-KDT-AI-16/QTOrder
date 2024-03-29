@@ -25,8 +25,9 @@ public class GetfesDateService implements Command {
 		
 		 FestivalVO fvo = fdao.getFesDate(fes_idx);
 		 
-		 JSONObject jsonObject = new JSONObject(); jsonObject.put("startDate",
-		 fvo.getFes_start()); jsonObject.put("endDate", fvo.getFes_end());
+		 JSONObject jsonObject = new JSONObject();
+		 jsonObject.put("startDate",fvo.getFes_start());
+		 jsonObject.put("endDate", fvo.getFes_end());
 		 
 		 // 응답 헤더 설정 response.setContentType("application/json");
 		 response.setCharacterEncoding("UTF-8");
@@ -35,7 +36,6 @@ public class GetfesDateService implements Command {
 		 PrintWriter out = response.getWriter();
 		 out.print(jsonObject.toString());
 		 out.flush();
-		 
 		
 		return null;
 	}

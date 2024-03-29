@@ -44,7 +44,6 @@ public class CustUserService implements Command {
 		
 		jsonObject2 = jsonObject2.getJSONObject("response");
 		
-		HttpSession session = request.getSession();
 		CustomerVO existingCustomer = (CustomerVO) request.getServletContext().getAttribute("customerInfo");
 		
 		// 현재 로그인이 안되어있다면

@@ -563,8 +563,7 @@
                             <a class="nav-link collapsed" href="accounts.jsp">
                                 <div class="nav-link-icon"><i data-feather="dollar-sign"></i></div>
                                 정산
-                            </a>
-                            
+                            </a>                          
                         </div>
                     </div>
                     <!-- Sidenav Footer-->
@@ -577,47 +576,54 @@
                 </nav>
             </div>
             <div id="layoutSidenav_content">
-                <div style="background-color:#bcaaa4; display: flex;">                    
+                <div style="background-color:#bcaaa4; display: flex;">                                       
                     <div id="order-menu-list" style="min-width: 250px; color: #ffffff; background-color:#355e3b; flex: 1; position: relative; z-index: 1000; min-height: 100vh">
-                       <div id="order-detail-num">1</div>
-                       <button id="moveCardLeftButton">카드 이동</button>
-                       <button id="moveCardRightButton">카드 이동</button>
-                       <form action="">
-                       	<div><input type="text"></div>
-                       	<div>
-                       		<div>
-						      <input type="radio" id="cooking" name="orderStatus" value="cooking" required>
-						      <label for="cooking">조리 중</label>
-						    </div>
-						    <div>
-						      <input type="radio" id="cooked" name="orderStatus" value="cooked">
-						      <label for="cooked">조리 완료</label>
-						    </div>
-						    <div>
-						      <input type="radio" id="delivered" name="orderStatus" value="delivered">
-						      <label for="delivered">전달 완료</label>
-						    </div>
-                       	</div>
-                       	<button type="submit">제출</button>
-                       </form>
+                                             
                     </div>
                     <div style="flex: 3;">
-                       <div class="px-4 mt-5">
-                           <h1 class="title">Hover over the cards</h1>                              
-	                       <div id="app" class="vue-container" :style="{ 'transform': `translateX(\${translateX}px)` }">                     
-	                         <card v-for="(order, index) in orders" :key="order" @click.native="moveCardToFirst(index)"
-	                               data-image="https://media.istockphoto.com/id/157479378/ko/%EC%82%AC%EC%A7%84/%ED%95%AB%EB%8F%84%EA%B7%B8-%EB%A8%B8%EC%8A%A4%ED%84%B0%EB%93%9C%EC%99%80-%EC%BC%80%EC%B2%A9.jpg?s=612x612&w=0&k=20&c=108PFIu9ndXIOMoI7seKRti7ge3-s0Us2iay6duRRAM=">
-	                           <div slot="number" class="corner-tag"> {{order.order_idx}}</div>    
-	                           <div slot="state" class="corner-tag2"> {{order.order_state}}</div>                    
-	                           <h1 slot="header" style="display: flex">{{order.menu_name}}</h1>
-	                           <p slot="content">외 {{order.order_cnt - 1}}건</p>
-	                         </card>
-	                       </div> 
-                       </div>                  
-                    </div>
-                </div>
+                          <div class="px-4 mt-5">
+                              <h1 class="title">Hover over the cards</h1>                              
+                             <div id="app" class="vue-container" :style="{ 'transform': `translateX(\${translateX}px)` }">                     
+                        <card v-for="(order, index) in orders" :key="order.order_idx" :translate-x="translateX" @click.native="moveCardToFirst(index, order.order_idx)"
+                                     data-image="https://media.istockphoto.com/id/157479378/ko/%EC%82%AC%EC%A7%84/%ED%95%AB%EB%8F%84%EA%B7%B8-%EB%A8%B8%EC%8A%A4%ED%84%B0%EB%93%9C%EC%99%80-%EC%BC%80%EC%B2%A9.jpg?s=612x612&w=0&k=20&c=108PFIu9ndXIOMoI7seKRti7ge3-s0Us2iay6duRRAM=">
+               
+                           <div slot="number" class="corner-tag"> {{order.order_idx}}</div>    
+                                    <div slot="state" class="corner-tag2"> {{order.order_state}}</div>                    
+                                    <h1 slot="header" style="display: flex">{{order.menu_name}}</h1>
+                                    <p slot="content">외 {{order.order_cnt - 1}}건</p>
+                              </card>
+                     </div>
+                     <div>                            
+                                <button id="moveCardLeftButton">카드 이동</button>
+                                <button id="moveCardRightButton">카드 이동</button>
+                                <button id="startButton">영업 시작</button>
+                                <button id="stopButton">영업 종료</button>
+                        <form id="orderForm" action="">
+                           <div>
+                              <input type="text" v-model= "inputNumber">
+                           </div>
+                           <button type="submit">제출</button>
+                           <div>
+                              <div>                        
+                                 <input type="radio" id="cooking" name="orderStatus"
+                                    value="조리 중" required> <label for="cooking">조리 중</label>
+                              </div>
+                              <div>
+                                 <input type="radio" id="cooked" name="orderStatus"
+                                    value="조리 완료"> <label for="cooked">조리 완료</label>
+                              </div>
+                              <div>
+                                 <input type="radio" id="delivered" name="orderStatus"
+                                    value="주문 완료"> <label for="delivered">전달 완료</label>
+                              </div>
+                           </div>                     
+                        </form>
+                     </div>   
+                  </div>
+               </div>
             </div>
-        </div>
+         </div>
+      </div>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>   
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
@@ -631,195 +637,480 @@
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script> 
     </body>
        
-    <script type="text/javascript">
-    
-       /* function startInterval() {
-         interval = setInterval( () => {
-            $.ajax({
-               type: "get",          //1.서버에 요청하는 방식(get/post) 
-               url: "CreateOrderList",       //2.서버에 요청되는 주소 
-               //data : {'menu' : menu_name}, //3.클라이언트가 서버에 전달할 데이터 
-               dataType: "json",       //4.서버로부터 받아온 응답 데이터의 타입
-               success: function (data) { //5-1.요청에 대한 응답이 성공했을때 동작할 함수
-                   //showOrderAll(data);
-                  console.log(data);
-               },
-               error: function () { //5-2.요청에 대한 응답이 실패했을때 동작할 함수
-                  console.log("error");
-               }
-            });
-         }, 1000)
-      }
-       
-       startInterval(); */
+   <script type="text/javascript">
        let order_menu_list = document.getElementById("order-menu-list")
-       let order_idx = 4
-       $.ajax({
-         type: "get",
-         url: "SelectOrderMenuDetail",
-         data: {"order_idx" : order_idx},
-         dataType: "json",
-         success: function(data) {
-            console.log(data)
-            let element = "";
-            for(let i = 0; i < data.length; i++) {
-               element += `
-                  <div> \${ data[i].menu_name } \${ data[i].menu_cnt}개 </div>
-                  <div> \${ data[i].mo_name } : \${ data[i].mo_notice }</div>
-               `
-            }
-            order_menu_list.insertAdjacentHTML("afterbegin", element)   
-         },
-         error: function() {
-            console.log("error");
-         }
-      })           
-       
-      Vue.config.devtools = true;
-      
-      Vue.component('card', {
-        template: `
-          <div class="vue-card-wrap"
-            @mousemove="handleMouseMove"
-            @mouseenter="handleMouseEnter"
-            @mouseleave="handleMouseLeave"
-            ref="card">
            
-            <div class="vue-card"
-              :style="cardStyle">
-               <slot name="number"></slot>
-               <slot name="state"></slot>
-              <div class="vue-card-bg" :style="[cardBgTransform, cardBgImage]"></div>
-              <div class="vue-card-info">                
-                <slot name="header"></slot>
-                <slot name="content"></slot>
-              </div>
-            </div>
-          </div>`,
-        mounted() {
-          this.width = this.$refs.card.offsetWidth;
-          this.height = this.$refs.card.offsetHeight;
-        },
-        props: ['dataImage'],
-        data: () => ({
-          width: 0,
-          height: 0,
-          mouseX: 0,
-          mouseY: 0,
-          mouseLeaveDelay: null          
-        }),
-        computed: {
-           mousePX() {
-               return this.mouseX / this.width;
-             },
-             mousePY() {
-               return this.mouseY / this.height;
-             },
-          cardStyle() {
-            const rX = this.mousePX * 30;
-            const rY = this.mousePY * -30;
-            return {
-              transform: `rotateY(\${rX}deg) rotateX(\${rY}deg)`
-            };
-          },
-          cardBgTransform() {
-            const tX = this.mousePX * -40;
-            const tY = this.mousePY * -40;
-            return {
-              transform: `translateX(\${tX}px) translateY(\${tY}px)`
+      Vue.config.devtools = true;
+       
+       Vue.component('card', {
+           template: `
+              <div class="vue-card-wrap"
+                  @mousemove="handleMouseMove" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave" ref="card">
+                <div class="vue-card" :style="cardStyle">
+                   <slot name="number"></slot>
+                   <slot name="state"></slot>
+                   <div class="vue-card-bg" :style="[cardBgTransform, cardBgImage]"></div>
+                   <div class="vue-card-info">
+                      <slot name="header"></slot>
+                         <slot name="content"></slot>
+                      </div>
+                  </div>
+               </div>`,
+         mounted() {
+               this.width = this.$refs.card.offsetWidth;
+               this.height = this.$refs.card.offsetHeight;
+           },
+           props: ['dataImage', 'translateX'],
+           data: () => ({
+             width: 0,
+             height: 0,
+             mouseX: 0,
+             mouseY: 0,
+             mouseLeaveDelay: null          
+           }),
+           computed: {
+              mousePX() {
+                 return this.mouseX / this.width;
+              },
+              mousePY() {
+                 return this.mouseY / this.height;
+              },
+              cardStyle() {
+                  const rX = this.mousePX * 30;
+                  const rY = this.mousePY * -30;
+                  return {
+                     transform: `rotateY(\${rX}deg) rotateX(\${rY}deg)`
+                  };
+               },
+               cardBgTransform() {
+                  const tX = this.mousePX * -40;
+                  const tY = this.mousePY * -40;
+                  return {
+                     transform: `translateX(\${tX}px) translateY(\${tY}px)`
+                  }
+               },
+               cardBgImage() {
+                  return {
+                     backgroundImage: `url(\${this.dataImage})`
+                  }
+               }
+           },
+           methods: {
+              handleMouseMove(e) {             
+                  this.mouseX = e.pageX - this.$refs.card.offsetLeft - this.width/2 - 270 - this.translateX;
+                  this.mouseY = e.pageY - this.$refs.card.offsetTop - this.height/2 - 60 - 80;
+                  if(this.mouseX <= -180) this.mouseX = -180;
+                  if(this.mouseX >= 180) this.mouseX = 180;
+              
+               //console.log("this.$refs.card.offsetLeft")
+               //console.log(this.$refs.card.offsetLeft)
+                },
+                handleMouseEnter() {
+                  clearTimeout(this.mouseLeaveDelay);
+                },
+                handleMouseLeave() {
+                  this.mouseLeaveDelay = setTimeout(()=>{
+                  this.mouseX = 0;
+                  this.mouseY = 0;
+                  }, 500);
             }
-          },
-          cardBgImage() {
-            return {
-              backgroundImage: `url(\${this.dataImage})`
-            }
-          }
-        },
-        methods: {
-          handleMouseMove(e) {             
-            this.mouseX = e.pageX - this.$refs.card.offsetLeft - this.width/2 + 240 - 550;
-            this.mouseY = e.pageY - this.$refs.card.offsetTop - this.height/2 - 60 - 80
-            console.log("e.pageX")
-            console.log(e.pageX)
-            console.log("this.$refs.card.offsetLeft")
-            console.log(this.$refs.card.offsetLeft)
-          },
-          handleMouseEnter() {
-            clearTimeout(this.mouseLeaveDelay);
-          },
-          handleMouseLeave() {
-            this.mouseLeaveDelay = setTimeout(()=>{
-            this.mouseX = 0;
-            this.mouseY = 0;
-            }, 500);
-          }
-        }
+         }
       });
       
-      const app = new Vue({
-        el: '#app',
-        data : {
-           orders: [],
-           order_num: [],
-           translateX: 0
-        },
-        mounted() {
-           this.fetchSessionValue()
-        },
-        methods: {
-           fetchSessionValue() {
-              $.ajax({
-                     type: "get",
-                     url: "CreateOrderList", // selectOrderList
-                     dataType: "json",
-                     success: (data) => {
+       const app = new Vue({
+          el: '#app',
+           data : {
+              orders: [],
+              order_num: [],
+              translateX: 0,
+              targetOrderIdx: 0,
+              inputNumber: '',
+           },
+           mounted() {
+              this.fetchSessionValue()
+           },
+           methods: {
+              fetchSessionValue() {
+                 $.ajax({
+                    type: "get",
+                    url: "CreateOrderList", // selectOrderList
+                    dataType: "json",
+                    success: (data) => {
                        // 응답 받은 데이터를 orders 배열에 할당
-                       this.orders = data;                       
+                       this.orders = data;
                        const orderIds = [...new Set(data.map(order => order.order_idx))];
                        this.order_num = orderIds;
-                       console.log(data)
-                       
-                     },
-                     error: () => {
+                       console.log(data)  
+                    },
+                    error: () => {
                        console.log("error");
+                    }
+                 });
+              },
+              moveCardLeft() {
+                 const cardWidth = 415; // 카드 하나의 너비, 실제 너비에 맞게 조정 필요
+                 this.translateX -= cardWidth; // 왼쪽으로 이동할 거리 조정
+              },
+              moveCardRight() {
+                 const cardWidth = 415; // 카드 하나의 너비, 실제 너비에 맞게 조정 필요
+                 this.translateX += cardWidth; // 왼쪽으로 이동할 거리 조정
+              },
+              moveToCard() {
+                 console.log('moveToCard called', this.targetOrderIdx); 
+                 const targetIndex = this.orders.findIndex(order => order.order_idx == this.targetOrderIdx);
+                 if (targetIndex !== -1) {
+                    // 찾은 카드를 첫 번째 위치로 이동
+                    this.moveCardToFirst(targetIndex, this.targetOrderIdx);
+                 } else {
+                       alert("해당하는 카드가 없습니다.");
+                 }
+              },
+              moveCardToFirst(clickedCardIndex, order_idx) {
+                 const cardWidth = 415; // 카드 하나의 너비
+                 if (clickedCardIndex === -1) {
+                    return;
+                 }
+                 this.translateX = -cardWidth * clickedCardIndex;
+                 
+                 $.ajax({
+                    type: "get",
+                    url: "SelectOrderMenuDetail",
+                    data: {"order_idx" : order_idx},
+                    dataType: "json",
+                    success: function(data) {
+                       
+                       console.log(data)
+                       let element = "";
+                       order_menu_list.innerHTML = ""
+                       for(let i = 0; i < data.length; i++) {
+                          element += `
+                             <div> \${ data[i].menu_name } \${ data[i].menu_cnt}개 </div>
+                             <div> \${ data[i].mo_name } : \${ data[i].mo_notice }</div>
+                          `
+                       }
+                       element += `<div id="order-detail-num">\${ data[0].order_idx }</div>`;
+                     order_menu_list.insertAdjacentHTML("afterbegin", element)
+                  },
+                  error: function() {
+                     console.log("error");
+                  }
+               })
+            },
+            handleFormSubmit(event) {
+                 event.preventDefault(); // 폼의 기본 제출 동작을 방지
+                 const orderIndexInput = document.querySelector("#orderForm input[type='text']");
+                 const selectedOrderStatus = document.querySelector("input[name='orderStatus']:checked").value;
+               
+                 if (orderIndexInput) {
+                     this.targetOrderIdx = orderIndexInput.value; // 입력 필드에서 값을 읽어옴
+                     this.moveToCard(); // moveToCard 메소드 호출
+                     
+                     $.ajax({
+                       type: "get",
+                       url: "ChangeOrderStatus",
+                       data: {
+                          "targetOrderIdx" : this.targetOrderIdx,
+                          "selectedOrderStatus" : selectedOrderStatus
+                       },
+                       //dataType: "json",
+                       success: function() {
+                          /* const divs = document.querySelectorAll('.corner-tag');
+                          const divs2 = document.querySelectorAll('.corner-tag2');
+                          const targetDiv = Array.from(divs).find(div => div.textContent.trim() === orderIndexInput.value);
+                          const targetDiv = Array.from(divs).find(div => div.textContent.trim() === orderIndexInput.value);
+                          console.log(targetDiv, "상태변경")
+                          if (targetDiv) {
+                            // 찾은 요소의 텍스트 내용을 '80'으로 변경
+                            targetDiv.textContent = selectedOrderStatus;
+                            
+                          } */
+                          
+                          const cards = document.querySelectorAll('.vue-card');
+
+                          // .vue-card 요소를 순회하며 조건에 맞는 요소 찾기
+                          cards.forEach(card => {
+                            // 현재 .vue-card 안의 .corner-tag 요소를 찾음
+                            const cornerTag = card.querySelector('.corner-tag');
+                            
+                            // .corner-tag의 텍스트가 '8'인지 확인
+                            if(cornerTag.textContent.trim() === orderIndexInput.value) {
+                              // 조건에 맞는 .vue-card 안의 .corner-tag2 요소를 찾음
+                              const cornerTag2 = card.querySelector('.corner-tag2');
+                              // .corner-tag2의 텍스트를 '조리완료'로 변경
+                              cornerTag2.textContent = selectedOrderStatus;
+                            }
+                          });
+                     },
+                     error: function() {
+                        console.log("주문 상태 변경 error");
                      }
-                });   
-           },
-           moveCardLeft() {
-               const cardWidth = 415; // 카드 하나의 너비, 실제 너비에 맞게 조정 필요
-               this.translateX -= cardWidth; // 왼쪽으로 이동할 거리 조정
-           },
-           moveCardRight() {
-               const cardWidth = 415; // 카드 하나의 너비, 실제 너비에 맞게 조정 필요
-               this.translateX += cardWidth; // 왼쪽으로 이동할 거리 조정
-           }, 
-           moveCardToFirst(clickedCardIndex) {
-              const cardWidth = 415; // 카드 하나의 너비
-                // 클릭된 카드가 이미 첫 번째 위치에 있다면 아무 동작도 하지 않음
-              if (clickedCardIndex === 0) {
-                 return;
-              }
-                // 클릭된 카드를 첫 번째 위치로 옮기기 위해 필요한 이동 거리 계산
-              this.translateX = -cardWidth * clickedCardIndex;
-           },
-           voiceCommand() {
-        	   console.log("voiceCommand method called");
-           }
-        }        
+                  })   
+                 }                                
+             }
+         }
+       });
+       
+       document.addEventListener('DOMContentLoaded', function() {
+         const moveCardLeftButton = document.getElementById('moveCardLeftButton');
+         const moveCardRightButton = document.getElementById('moveCardRightButton');
+         const orderForm = document.getElementById('orderForm');
+         
+         moveCardLeftButton.addEventListener('click', function() {
+            app.moveCardLeft(); // Vue 인스턴스의 moveCard 메소드 호출
+           });
+         moveCardRightButton.addEventListener('click', function() {
+            app.moveCardRight(); // Vue 인스턴스의 moveCard 메소드 호출
+         });         
+         orderForm.addEventListener('submit', function(event) {
+              app.handleFormSubmit(event); // 폼 제출 이벤트 처리
+          });
       });
+   </script>
+   <script>
+   // 음성인식
+    const startButton = document.getElementById('startButton');
+    const stopButton = document.getElementById('stopButton');
+    let chunks = [];
+    let isListening = false;
+
+    // 오디오 녹음 시작 버튼 클릭
+    startButton.onclick = function() {
+        startButton.style.display = 'none';
+        stopButton.style.display = 'block';
         
-      document.addEventListener('DOMContentLoaded', function() {
-          const moveCardLeftButton = document.getElementById('moveCardLeftButton');
-          const moveCardRightButton = document.getElementById('moveCardRightButton');
-          
-          moveCardLeftButton.addEventListener('click', function() {
-              app.moveCardLeft(); // Vue 인스턴스의 moveCard 메소드 호출
-          });
-          moveCardRightButton.addEventListener('click', function() {
-              app.moveCardRight(); // Vue 인스턴스의 moveCard 메소드 호출
-          });
-      });
+        navigator.mediaDevices.getUserMedia({ audio: true })
+        .then(function(stream) {
+            // 오디오 녹음 시작
+            const mediaRecorder = new MediaRecorder(stream);
+            mediaRecorder.start();
+            console.log(mediaRecorder.state);
+            
+            // 오디오 데이터가 준비되면 실행
+            mediaRecorder.ondataavailable = function(event) {
+                chunks.push(event.data);
+            }
+
+            // 녹음 중지 버튼 클릭 시 처리
+            stopButton.onclick = function() {
+                mediaRecorder.stop();
+            }
+
+            // 녹음이 중지되면 실행
+            mediaRecorder.onstop = function() {
+                const blob = new Blob(chunks, { type: 'audio/wav' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'recorded_audio.wav';
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                chunks = [];
+                startButton.style.display = 'block';
+                stopButton.style.display = 'none';
+            }
+
+            // 음성 인식 시작
+            startSpeechRecognition();
+        })
+        .catch(function(err) {
+            console.error('오디오 녹음에 실패했습니다.', err);
+        });
+    }
+
+ // 음성 인식 시작 함수
+    function startSpeechRecognition() {
+        if (!('webkitSpeechRecognition' in window)) {
+            alert('웹 브라우저가 음성 인식을 지원하지 않습니다.');
+            return;
+        }
+
+        const recognition = new webkitSpeechRecognition();
+        recognition.lang = 'ko-KR';
+        recognition.continuous = true;
+        recognition.interimResults = false;
+
+        recognition.onstart = function() {
+            console.log('음성 인식이 시작되었습니다.');
+        }
+
+        recognition.onresult = function(event) {
+            const transcript = event.results[0][0].transcript;
+            console.log('인식된 텍스트:', transcript);
+            
+            if (transcript.includes('조리 중') || transcript.trim().includes('조리 중')) {
+               
+               console.log("조리중 인식");
+               let order_idx;
+               
+               var match = transcript.match(/\b\d+번?\b/g);
+               if (match !== null) {
+                   console.log(match[0]); // "31번" 출력
+                   if (order_idx === undefined) {
+                       order_idx = match[0];
+                   }
+                   console.log("or ",order_idx); // "31번" 출력
+               } else {
+                   console.log("숫자를 찾을 수 없습니다.");
+               }
+                
+                console.log("or2 ", order_idx);
+               
+                $.ajax({
+                 type: "get",
+                   url : 'ChangeOrderStatus',
+                     data: {
+                     "targetOrderIdx" : order_idx,
+                     "selectedOrderStatus" : '조리 중'
+                  },
+                     success : function() {
+                        
+                        const cards = document.querySelectorAll('.vue-card');
+
+                 // .vue-card 요소를 순회하며 조건에 맞는 요소 찾기
+                    cards.forEach(card => {
+                   // 현재 .vue-card 안의 .corner-tag 요소를 찾음
+                         const cornerTag = card.querySelector('.corner-tag');
+                   
+                   // .corner-tag의 텍스트가 '8'인지 확인
+                         if(cornerTag.textContent.trim() === order_idx) {
+                     // 조건에 맞는 .vue-card 안의 .corner-tag2 요소를 찾음
+                           const cornerTag2 = card.querySelector('.corner-tag2');
+                     // .corner-tag2의 텍스트를 '조리완료'로 변경
+                           cornerTag2.textContent = '조리 중';
+                         }
+                    });
+                 
+                     // tts 부분
+                        let text = order_idx+"번 주문 조리 중으로 변경합니다.";
+                        ttsTest(text);
+                        console.log('주문상태를 조리중으로 변경하였습니다.');
+                         
+                         // sms 전송
+                         //checkTimeAndExecuteService();
+                        recognition.stop();
+                        setTimeout(function() {
+                             recognition.start();
+                        }, 1000);  
+                  },
+                  error : function() {
+
+                  }
+               });
+                recognition.stop();
+                setTimeout(function() {
+                    recognition.start();
+                }, 1000); 
+            }
+            
+            else if(transcript.includes('완료')){
+               
+               var match = transcript.match(/\b\d+번?\b/g);
+               if (match !== null) {
+                   console.log(match[0]); // "31번" 출력
+                   if (order_idx === undefined) {
+                       order_idx = match[0];
+                   }
+                   console.log("or ",order_idx); // "31번" 출력
+               } else {
+                   console.log("숫자를 찾을 수 없습니다.");
+               }
+                
+                console.log("or2 ", order_idx);
+                
+                $.ajax({
+                  url : 'http://localhost:8081/QRservice/changeOrderStatus2.do?order_idx='+order_idx,
+
+                  success : function(result) {
+                     console.log("re ",result);
+                  if(result.row == 1){
+                     // tts 부분
+                     let text = order_idx+"번 주문 배송완료로 변경합니다.";
+                         ttsTest(text);
+                         console.log('주문상태를 배송완료로 변경하였습니다.');
+                         
+                         recognition.stop();
+                         setTimeout(function() {
+                             recognition.start();
+                         }, 1000); 
+                  }
+                  },
+                  error : function() {
+
+                  }
+               });
+                
+                recognition.stop();
+                setTimeout(function() {
+                    recognition.start();
+                }, 1000);
+            }
+            
+            else if(transcript.includes('취소')){
+            let text = "주문 취소 처리되었습니다.";
+                ttsTest(text);
+                console.log('주문 취소 처리되었습니다.');
+                
+                recognition.stop();
+                setTimeout(function() {
+                    recognition.start();
+                }, 1000);
+            }
+         
+            else if(transcript.includes("큐티")){
+            let text = "네. 말씀하세요.";
+                ttsTest(text);
+                
+            recognition.stop();
+                setTimeout(function() {
+                    recognition.start();
+                }, 1000);
+         }else{
+            recognition.stop();
+            setTimeout(function() {
+                    recognition.start();
+                }, 1000);
+         }
+        }
+
+        recognition.onerror = function(event) {
+            console.error('음성 인식 중 오류가 발생했습니다.', event.error);
+        }
+
+        recognition.onend = function() {
+            console.log('음성 인식이 종료되었습니다.');
+            
+            recognition.start();
+        }
+
+        recognition.start();
+    }
+
+ //tts 함수
+ function ttsTest(text){
+   var synth = window.speechSynthesis;
+
+   var textToSpeak = text;
+
+   var utterance = new SpeechSynthesisUtterance(textToSpeak);
+
+   synth.speak(utterance);
+ }
+ 
+ function checkTimeAndExecuteService() {
+   $.ajax({
+      type: "POST",
+       url: "http://localhost:8081/QRservice/postmsg.do",
+       data: { /* 서비스에 필요한 데이터 */},
+       success: function(response) {
+                       
+       },
+       error: function(xhr, status, error) {
+                       
+       }
+   });
       
+}
    </script>
 </body>
 </html>

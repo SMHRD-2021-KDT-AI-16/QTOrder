@@ -119,6 +119,20 @@
 		update tb_order set order_state = "완료" where order_idx=#{order_idx}
 	</update>
 	
+	<select id="order_num_get_state" resultType="kr.qtorder.model.OrderStateNowVO">
+		select a.order_idx, ft_name, a.ordered_at, menu_name, menu_price, menu_cnt, mo_name, b.mo_notice, a.order_state
+		from (select a.ft_name, a.ordered_at, order_idx, menu_cnt, od_idx, order_state, menu_name, menu_price, b.mo_name
+		from(select a.ft_name, a.ordered_at, order_idx, menu_cnt, mo_idx, od_idx, order_state, b.menu_name, b.menu_price
+		from (select b.ft_name, a.ordered_at, order_idx, menu_cnt, mo_idx, od_idx, menu_idx, order_state
+		from (select a.ft_idx, ordered_at, a.order_state, b.*
+		from (select ft_idx, ordered_at, order_idx, order_state from tb_order where cust_phone = #{cust_phone} and order_state != "완료")as a
+		left join tb_order_menu as b on a.order_idx = b.order_idx) as a
+		left join tb_foodtruck as b on a.ft_idx = b.ft_idx) as a
+		left join tb_menu as b on a.menu_idx = b.menu_idx)as a
+		left join tb_menu_option as b on a.mo_idx = b.mo_idx) as a
+		left join tb_option_detail as b on a.od_idx= b.od_idx
+	</select>
+	
 	
 	
 </mapper>

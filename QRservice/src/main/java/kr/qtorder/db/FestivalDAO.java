@@ -33,11 +33,11 @@ public class FestivalDAO {
 		return row;
 	}
 	
-	public String Festival_loc(String fes_name){
+	public int Festival_loc(String fes_name){
 		SqlSession session = factory.openSession();
-		//System.out.println("dao test : "+fes_name);
-		String loc_idx = session.selectOne("get_fes_idx");
-		//System.out.println("loc_idx : "+loc_idx);
+		System.out.println("dao test : "+fes_name);
+		int loc_idx = session.selectOne("get_fes_idx",fes_name);
+		System.out.println("loc_idx : "+loc_idx);
 		session.close();
 		return loc_idx;
 	}

@@ -12,13 +12,16 @@
 <meta name="author" content="" />
 <title>QTOrder</title>
 <link href="css/styles.css" rel="stylesheet" />
-<link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
+<link rel="icon" type="image/x-icon" href="assets/img/logo_small.png" />
 <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
 
 </head>
-<body style="background-color: #FA823C">
+<body style="background-color: #FA823C; text-align: center;">
+<div id="empty" style="height: 10%"></div>
+	<img alt="" src="assets/img/col_logo.png" style="width: 100%" >
+	
 <%
-    String clientId = "LbSKpthI2uLCgKvmUEpp";//애플리케이션 클라이언트 아이디값";
+    String clientId = "LbSKpthI2uLCgKvmUEpp";
     String redirectURI = URLEncoder.encode("http://127.0.0.1:8081/QRservice/storelist.jsp", "UTF-8");
     SecureRandom random = new SecureRandom();
     String state = new BigInteger(130, random).toString();
@@ -41,7 +44,7 @@
 								<div class="card-body">
 									<form>
 										<div class="mb-3" style="text-align: center;">
-											<label class="small mb-1" for="inputPhoneNumber">네이버계정으로 로그인</label>
+											<label class="small mb-1" for="inputPhoneNumber" style="";>네이버계정으로 로그인</label>
 											<br>
 											<a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
 										</div>
@@ -52,6 +55,8 @@
 					</div>
 				</div>
 			</main>
+			<!-- <div id="empty" style="height: 20px"></div>
+			<img alt="" src="assets/img/fes_logo.png" > -->
 		</div>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

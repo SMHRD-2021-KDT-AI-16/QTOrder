@@ -21,13 +21,14 @@
 <title>QTOrder</title>
 <link href="css/styles.css" rel="stylesheet" />
 <link href="css/yg.css" rel="stylesheet" />
-<link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
+<link rel="icon" type="image/x-icon" href="assets/img/logo_small.png" />
 <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
 
 </head>
-<body style="background-color: #FA823C">
+<body style="background-color: #FA823C;">
 <div id="qtlayer-up" class="qtlayer-up" style="display: flex; justify-content: center; align-items: center;">
+
     <div style="text-align: center;">
     <div style="display: inline-block;">
         <a class="btn" href="storelist.do"><i data-feather="shopping-bag" style="font-size: 24px;"></i>상점</a>
@@ -40,7 +41,7 @@
     <div style="display: inline-block;" class="dropdown">
     <button id="dropdownMenuButton" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button"><i data-feather="file-text" style="font-size: 24px;"></i>주문</button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    	<a class="dropdown-item" href=".do">주문현황</a>
+    	<a class="dropdown-item" href="order_state.do">주문현황</a>
         <a class="dropdown-item" href="getreceipt.do">영수증</a>
         </div>
     </div>
@@ -48,6 +49,9 @@
 </div>
 
 <div id="empty"></div>
+<div style="text-align: center; width: 100%">
+	<img alt="" src="assets/img/fes_logo.png" style="width: 320px; height: 180px">
+</div>
 <%
 HttpSession session3 = request.getSession();
 

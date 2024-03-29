@@ -16,10 +16,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Join Organization - SB Admin Pro</title>
+        <title>QTOrder</title>
         <link href="css/styles.css" rel="stylesheet" />
         <link href="css/yg.css" rel="stylesheet" />
-        <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
+        <link rel="icon" type="image/x-icon" href="assets/img/logo_small.png" />
         <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
     </head>
@@ -38,7 +38,7 @@
     <div style="display: inline-block;" class="dropdown">
     <button id="dropdownMenuButton" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button"><i data-feather="file-text" style="font-size: 24px;"></i>주문</button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    	<a class="dropdown-item" href=".do">주문현황</a>
+    	<a class="dropdown-item" href="order_state.do">주문현황</a>
         <a class="dropdown-item" href="getreceipt.do">영수증</a>
         </div>
     </div>
@@ -47,6 +47,7 @@
 
 <div id="empty"></div>
         <div id="layoutAuthentication">
+        
             <div id="layoutAuthentication_content">
                 <main>
                     <div class="container-xl px-4">
@@ -108,7 +109,7 @@
                                     %>
                                     
                                     
-                                    <!-- 세트메뉴 -->
+                                    <%-- <!-- 세트메뉴 -->
                                     <div class="card-body h5 mb-0 text-left info-set">세트 메뉴</div>
                                     <% for(SetGroupVO group : setGroup) { %>
                                     	<div class="group-body h5"><%= group.getGroup_name() %></div>
@@ -133,7 +134,7 @@
 			                            </a>
 			                            </div>
 	                                    <hr class="m-0" />
-		                            <% } %> <!-- 바깥쪽 for -->
+		                            <% } %> <!-- 바깥쪽 for --> --%>
 		                            
 		                            
 		                            <!-- 모든메뉴 -->
@@ -169,6 +170,26 @@
         <a id="orderbtn" class="basketbtn btn btn-qtbtn-reverse" href="getbasket.do">원 주문하기</a>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function() {
+            // 모든 price-set 클래스를 가진 요소를 선택합니다.
+            var priceElements = document.querySelectorAll('.price-set');
+
+            // 각 요소에 대해 루프를 돌면서 가격을 변환합니다.
+            priceElements.forEach(function(element) {
+                // 요소의 텍스트를 가져옵니다.
+                var priceString = element.innerText;
+
+                // 문자열에서 '원' 문자열을 제거하고 ','를 모두 제거한 후 숫자로 변환합니다.
+                var price = parseInt(priceString.replace('원', '').replace(/,/g, ''));
+
+                // 한국 통화 형식으로 숫자를 변환합니다.
+                var formattedPrice = price.toLocaleString("ko-KR");
+
+                // 변환된 가격을 요소의 텍스트로 설정합니다.
+                element.innerText = formattedPrice + '원';
+            });
+        });
+        
         $(document).ready(function() {
     		$.ajax({
     			url : 'http://localhost:8081/QRservice/getprice.do',

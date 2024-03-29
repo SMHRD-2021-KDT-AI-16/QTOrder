@@ -1,8 +1,11 @@
 package kr.qtorder.db;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import kr.qtorder.model.OrderStateNowVO;
 import kr.qtorder.model.OrderVO123;
 import kr.qtorder.model.Order_menuVO;
 
@@ -49,5 +52,12 @@ public class OrderDAO {
 		int row = session.update("chgOrStat2", order_idx);
 		session.close();
 		return row;
+	}
+	public List<OrderStateNowVO> order_num_get_state(String cust_phone){
+		SqlSession session = factory.openSession(true);
+		
+		List<OrderStateNowVO> list = session.selectList("order_num_get_state", cust_phone);
+		session.close();
+		return list;
 	}
 }
