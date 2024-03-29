@@ -335,7 +335,7 @@
                             <div class="collapse" id="collapsePages" data-bs-parent="#accordionSidenav">
                                 <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPagesMenu">
                                     <a class="nav-link" href="myTest.jsp">메인 사진</a>
-                                    <a class="nav-link" href="myTest2.jsp">메뉴 등록</a>
+                                    <a class="nav-link" href="myTest4.jsp">메뉴 등록</a>
                                     <a class="nav-link" href="myTest3.jsp">설정</a>
                                 </nav>
                             </div>
@@ -384,7 +384,7 @@
                         <!-- Illustration dashboard card example-->
                         <nav class = "nav nav-borders">
                         	<a class = "nav-link active ms-0" href = "TestServlet">메인 사진</a>
-                        	<a class = "nav-link " href = "myTest2.jsp">메뉴 등록</a>
+                        	<a class = "nav-link " href = "myTest4.jsp">메뉴 등록</a>
                         	<a class = "nav-link " href = "myTest3.jsp">설정</a>
                         	<a class = "nav-link " href = "#!">미리보기</a>
                         </nav>
@@ -426,7 +426,7 @@
 						  if ( files[i].isFile()){
 						    //out.println(files[i].getName());
 						    //System.out.println(files[i].getName());
-						   	//System.out.println(filePath);
+						   	System.out.println(filePath + files[0].getName());
 						  }
 						} 
 					%>
@@ -439,7 +439,8 @@
                                         <div class="d-flex align-items-center" class="image-show" id="image-show">
                                            <% if(files.length > 0) { %>
                                            <img width = "800px" height = "450px" class = 'image-thumnail' 
-                                           		src = '${ session_img }/<%= files[0].getName() %>' >
+                                           		<%-- src = '<%= filePath + files[0].getName() %>' > --%>
+                                           		src = 'assets/img/hotdog/main1.jpg' >
                                            <% } %>
                                         </div>
                                     </div>
@@ -525,6 +526,8 @@
         <script src="js/litepicker.js"></script>
     </body>
     <script>
+	   
+		    
 		var submit = document.getElementById('submitButton');
 		submit.onclick = showImage;     //Submit 버튼 클릭시 이미지 보여주기
 		

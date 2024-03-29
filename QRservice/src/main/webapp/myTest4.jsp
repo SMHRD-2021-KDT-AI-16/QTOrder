@@ -485,7 +485,7 @@
                             <div class="collapse" id="collapsePages" data-bs-parent="#accordionSidenav">
                                 <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPagesMenu">
                                     <a class="nav-link" href="myTest.jsp">메인 사진</a>
-                                    <a class="nav-link" href="myTest2.jsp">메뉴 등록</a>
+                                    <a class="nav-link" href="myTest4.jsp">메뉴 등록</a>
                                     <a class="nav-link" href="myTest3.jsp">설정</a>
                                 </nav>
                             </div>
@@ -534,7 +534,7 @@
                         <!-- Illustration dashboard card example-->
                         <nav class = "nav nav-borders">
                         	<a class = "nav-link ms-0" href = "TestServlet">메인 사진</a>
-                        	<a class = "nav-link active" href = "myTest2.jsp">메뉴 등록</a>
+                        	<a class = "nav-link active" href = "myTest4.jsp">메뉴 등록</a>
                         	<a class = "nav-link " href = "myTest3.jsp">설정</a>
                         	<a class = "nav-link " href = "#!">미리보기</a>
                         </nav>
@@ -561,10 +561,15 @@
 											<h5 class="modal-title" id="exampleModalLabel">메뉴 그룹명을 입력하세요.</h5>
 											<button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
 										</div>
-										<form>										
+										<form action="FileUpload" method="post" enctype="multipart/form-data" onsubmit="return updateMenu()">  										
 											<div class="modal-body row">										
-												<div class="modal-body-left" style="width: 50%">
-													<img style="border: 1px solid black"src="https://media.istockphoto.com/id/157483425/ko/%EC%82%AC%EC%A7%84/%ED%95%AB-%EA%B2%BD%EA%B2%AC-%EB%AA%A8%EB%93%A0-%EA%B3%A0%EC%A0%95-%ED%95%B8%EB%93%A4-%ED%8F%AC%ED%95%A8.jpg?s=612x612&w=0&k=20&c=Rg6OytnWItGBeAG73xlJlvu150O-RGjKTLdMcudW4II=">
+												<div class="modal-body-left" style="width: 50%; position: relative;">
+													<img id="imagePreview" style="border: 1px solid black" alt="Menu Image" src="https://media.istockphoto.com/id/157483425/ko/%EC%82%AC%EC%A7%84/%ED%95%AB-%EA%B2%BD%EA%B2%AC-%EB%AA%A8%EB%93%A0-%EA%B3%A0%EC%A0%95-%ED%95%B8%EB%93%A4-%ED%8F%AC%ED%95%A8.jpg?s=612x612&w=0&k=20&c=Rg6OytnWItGBeAG73xlJlvu150O-RGjKTLdMcudW4II=">
+													<input type="file" id="fileInput" name="fileInput" style="display: none;" accept="image/*">
+													<div style="position: absolute; top: 10px; right: 10px;">
+										                <button class="btn btn-primary btn-sm" type="button">삭제</button>
+										                <button class="btn btn-secondary btn-sm" type="button" onclick="document.getElementById('fileInput').click();">수정</button>
+										            </div>
 												</div>
 												<div class="modal-body-right" style="width: 50%">
 													<div class="mb-3">
@@ -590,7 +595,7 @@
 											</div>
 											<div class="modal-footer">
 												<button class="btn btn-secondary btn-sm" type="button" data-bs-dismiss="modal">Close</button>
-												<button class="btn btn-primary btn-sm" type="button" data-bs-dismiss="modal" onclick="updateMenu()">Save</button>
+												<button id="saveButton" class="btn btn-primary btn-sm" type="submit" data-bs-dismiss="modal" onclick="updateMenu()">Save</button>
 											</div>
 										</form>
 									</div>
@@ -631,7 +636,7 @@
 											</div>
 											<div class="modal-footer">
 												<button class="btn btn-secondary btn-sm" type="button" data-bs-dismiss="modal">Close</button>
-												<button class="btn btn-primary btn-sm" type="button" data-bs-dismiss="modal" onclick="addMenu()">Add</button>
+												<button class="btn btn-primary btn-sm" type="submit" data-bs-dismiss="modal" onclick="addMenu()">Add</button>
 											</div>
 										</form>
 									</div>
@@ -661,7 +666,8 @@
 		let inputMenuDuration = document.getElementById('inputMenuDuration');
 		let inputMenuInfo = document.getElementById('inputMenuInfo');
 		let inputMenuIdx = document.getElementById('inputMenuIdx');
-		
+		let imagePreview = document.getElementById('imagePreview');
+		imagePreview
 		let menu_list = document.getElementById("menu-list");
 		let menu_container = document.getElementById('menu-container');		
 		
@@ -677,10 +683,10 @@
             			<div class="flip-card">
 	                		<div class="flip-card-inner">
 	                			<div class="flip-card-front">     
-	                				<img class="" src="https://media.istockphoto.com/id/157483425/ko/%EC%82%AC%EC%A7%84/%ED%95%AB-%EA%B2%BD%EA%B2%AC-%EB%AA%A8%EB%93%A0-%EA%B3%A0%EC%A0%95-%ED%95%B8%EB%93%A4-%ED%8F%AC%ED%95%A8.jpg?s=612x612&w=0&k=20&c=Rg6OytnWItGBeAG73xlJlvu150O-RGjKTLdMcudW4II=">                    			
+	                				<img class="" src="assets/img/hotdog/\${data[i].menu_img}">                    			
 	                			</div>
 	                			<div class="flip-card-back">
-	                				<img style="opacity: 30%" src="https://media.istockphoto.com/id/157483425/ko/%EC%82%AC%EC%A7%84/%ED%95%AB-%EA%B2%BD%EA%B2%AC-%EB%AA%A8%EB%93%A0-%EA%B3%A0%EC%A0%95-%ED%95%B8%EB%93%A4-%ED%8F%AC%ED%95%A8.jpg?s=612x612&w=0&k=20&c=Rg6OytnWItGBeAG73xlJlvu150O-RGjKTLdMcudW4II=">
+	                				<img style="opacity: 30%" src="assets/img/hotdog/\${data[i].menu_img}">
 	                				<div class="text-overlay">
 		                				<h1 data-idx="\${ data[i].menu_idx }"> \${ data[i].menu_name }</h1>
 		                				<h4> \${ data[i].menu_price.toLocaleString("ko-KR") }원</h4>
@@ -709,35 +715,44 @@
 			inputMenuPrice.value = data.menu_price + "원";
 			inputMenuDuration.value = data.menu_waiting_time + "분";
 			inputMenuInfo.value = data.menu_info;
-			inputMenuIdx.value = data.menu_idx;			
+			inputMenuIdx.value = data.menu_idx;		
+			imagePreview.src = "assets/img/hotdog/" + data.menu_img;
 		}
 		
-		function updateMenu() {
-			let menu_name = inputMenuName.value;
+		function updateMenu() {		
+			
+		    let menu_name = inputMenuName.value;
 			let menu_price = inputMenuPrice.value;
 			let menu_duration = inputMenuDuration.value;
 			let menu_info = inputMenuInfo.value;
 			let menu_idx = inputMenuIdx.value;
+			let menu_imgName = fileInput.files[0];
 			
 			let menu = new Object();
 			
 			menu.menu_name = menu_name;
-			menu.menu_price = menu_price;
-			menu.menu_duration = menu_duration;
+			menu.menu_price = menu_price.replace("원", "");
+			menu.menu_duration = menu_duration.replace("분", "");
 			menu.menu_info = menu_info;
 			menu.menu_idx = menu_idx;
-			
-			$.ajax({
-				type: "get",
-				url: "UpdateMenu",
-				data : {'menu' : JSON.stringify(menu)},
-				success: function (data) {
-					
-				},
-				error: function() {
-					console.log("메뉴 수정 실패")
-				}
-			})
+			if(fileInput.files[0]) {
+		        menu.menu_image = fileInput.files[0].name;
+		    }
+			console.log(menu)
+		    $.ajax({
+		        type: "get",
+		        url: "UpdateMenu", // 서블릿 URL 변경
+		        data: {"formData" : JSON.stringify(menu)},		        
+		        success: function(response) {
+		            console.log("Upload Success", response);
+		            // 성공 로직 처리...
+		        },
+		        error: function(xhr, status, error) {
+		            console.error("Upload Failed", status, error);
+		            // 실패 로직 처리...
+		        }
+		    }); 
+			return true;
 		}
 		
 		function addMenu() {
@@ -769,10 +784,10 @@
 	            			<div class="flip-card">
 	                    		<div class="flip-card-inner">
 	                    			<div class="flip-card-front">     
-	                    				<img class="" src="https://media.istockphoto.com/id/157483425/ko/%EC%82%AC%EC%A7%84/%ED%95%AB-%EA%B2%BD%EA%B2%AC-%EB%AA%A8%EB%93%A0-%EA%B3%A0%EC%A0%95-%ED%95%B8%EB%93%A4-%ED%8F%AC%ED%95%A8.jpg?s=612x612&w=0&k=20&c=Rg6OytnWItGBeAG73xlJlvu150O-RGjKTLdMcudW4II=">                    			
+	                    				<img class="" src="assets/img/hotdog/\${data[i].menu_img}">                    			
 	                    			</div>
 	                    			<div class="flip-card-back">
-	                    				<img style="opacity: 30%" src="https://media.istockphoto.com/id/157483425/ko/%EC%82%AC%EC%A7%84/%ED%95%AB-%EA%B2%BD%EA%B2%AC-%EB%AA%A8%EB%93%A0-%EA%B3%A0%EC%A0%95-%ED%95%B8%EB%93%A4-%ED%8F%AC%ED%95%A8.jpg?s=612x612&w=0&k=20&c=Rg6OytnWItGBeAG73xlJlvu150O-RGjKTLdMcudW4II=">
+	                    				<img style="opacity: 30%" src="assets/img/hotdog/\${data[i].menu_img}">
 	                    				<div class="text-overlay">
 	    	                				<h1 data-idx="\${ data[i].menu_idx }"> \${ data[i].menu_name }</h1>
 	    	                				<h4> \${ data[i].menu_price.toLocaleString("ko-KR") }원</h4>
@@ -820,10 +835,10 @@
 		            			<div class="flip-card">
 		                    		<div class="flip-card-inner">
 		                    			<div class="flip-card-front">     
-		                    				<img class="" src="https://media.istockphoto.com/id/157483425/ko/%EC%82%AC%EC%A7%84/%ED%95%AB-%EA%B2%BD%EA%B2%AC-%EB%AA%A8%EB%93%A0-%EA%B3%A0%EC%A0%95-%ED%95%B8%EB%93%A4-%ED%8F%AC%ED%95%A8.jpg?s=612x612&w=0&k=20&c=Rg6OytnWItGBeAG73xlJlvu150O-RGjKTLdMcudW4II=">                    			
+		                    				<img style="border: 2px solid black;" src="assets/img/hotdog/\${data[i].menu_img}">                    			
 		                    			</div>
 		                    			<div class="flip-card-back">
-		                    				<img style="opacity: 30%" src="https://media.istockphoto.com/id/157483425/ko/%EC%82%AC%EC%A7%84/%ED%95%AB-%EA%B2%BD%EA%B2%AC-%EB%AA%A8%EB%93%A0-%EA%B3%A0%EC%A0%95-%ED%95%B8%EB%93%A4-%ED%8F%AC%ED%95%A8.jpg?s=612x612&w=0&k=20&c=Rg6OytnWItGBeAG73xlJlvu150O-RGjKTLdMcudW4II=">
+		                    				<img style="opacity: 30%" src="assets/img/hotdog/\${data[i].menu_img}">
 		                    				<div class="text-overlay">
 		    	                				<h1 data-idx="\${ data[i].menu_idx }"> \${ data[i].menu_name }</h1>
 		    	                				<h4> \${ data[i].menu_price.toLocaleString("ko-KR") }원</h4>
@@ -840,7 +855,9 @@
 		            	}
 		            	element += `
 		            		<div class="flip-card" data-bs-toggle="modal" data-bs-target="#AddMenuModalCenter" style="background-color: #333333;">
-		            			
+		            			<div style="background-color: white">
+		            				
+		            			</div>
 		            		</div>
 		            	`;
 		            	menu_container.insertAdjacentHTML("afterbegin", element);   
@@ -939,81 +956,77 @@
 		}
 	</script>
 	<script>
-	$(document).ready(function(){
-		  var zindex = 10;
+		$(document).ready(function(){
+		  	var zindex = 10;
 		  
-		  $(document).on("mouseenter", ".flip-card", function(e){
-		    e.preventDefault();
-		    console.log("click!!");
-		    var isShowing = false;
+		  	$(document).on("mouseenter", ".flip-card", function(e){
+		    	e.preventDefault();
+		    	console.log("click!!");
+		    	var isShowing = false;
 
-		    if ($(this).hasClass("show")) {
-		      isShowing = true
-		    }
+		    	if ($(this).hasClass("show")) {
+		      		isShowing = true
+		    	}
 
-		    if ($("div.menu-container").hasClass("showing")) { // a card is already in view
-		      $("div.flip-card.show")
-		        .removeClass("show");
+		    	if ($("div.menu-container").hasClass("showing")) { // a card is already in view
+		      		$("div.flip-card.show")
+		        	.removeClass("show");
 
-		      if (isShowing) { // this card was showing - reset the grid
-		        $("div.menu-container")
-		          .removeClass("showing");
-		      } else { // this card isn't showing - get in with it
-		        $(this)
-		          .css({zIndex: zindex})
-		          .addClass("show");
-		      }
-		      zindex++;
+		      	if (isShowing) { // this card was showing - reset the grid
+		        	$("div.menu-container")
+		          	.removeClass("showing");
+		      	} else { // this card isn't showing - get in with it
+		        	$(this)
+		          	.css({zIndex: zindex})
+		          	.addClass("show");
+		      	}
+		      	zindex++;
 
-		    } else { // no cards in view
-		      $("div.menu-container")
+			} else { // no cards in view
+		    	$("div.menu-container")
 		        .addClass("showing");
-		      $(this)
+		      	$(this)
 		        .css({zIndex:zindex})
 		        .addClass("show");
-		      zindex++;
-		    }		    
-		  });
-		  $(document).on("mouseleave", ".flip-card", function(e) {
-			  if ($("div.menu-container").hasClass("showing")) { 
-				  $("div.menu-container").removeClass("showing");
-			  }
-			  $("div.flip-card").removeClass("show");
-		  });
+		      	zindex++;
+			}		    
+		});
+		$(document).on("mouseleave", ".flip-card", function(e) {
+			if ($("div.menu-container").hasClass("showing")) { 
+				$("div.menu-container").removeClass("showing");
+			}
+			$("div.flip-card").removeClass("show");
+		});
 	});
 	</script>	
 	<script>
-		var submit = document.getElementById('submitButton');
-		submit.onclick = showImage;     //Submit 버튼 클릭시 이미지 보여주기
+		document.body.addEventListener('click', function(event) {
+		    if (event.target.classList.contains('trigger-file-input')) {
+		        document.getElementById('fileInput').click();
+		    }
+		});
+	
+		// 'fileInput' 변경 이벤트 처리
+		document.body.addEventListener('change', function(event) {
+		    if (event.target.id === 'fileInput') {
+		        var fileInput = event.target;
+		        if (fileInput.files && fileInput.files[0]) {
+		            var reader = new FileReader();
+		            reader.onload = function(e) {
+		                document.getElementById('imagePreview').src = e.target.result;
+		            };
+		            reader.readAsDataURL(fileInput.files[0]);
+		        }
+		    }
+		});
 		
-		function showImage() {
-		    var newImage = document.getElementById('image-show').lastElementChild;
-		    newImage.style.visibility = "visible";
-		    
-		    document.getElementById('image-upload').style.visibility = 'visible';
-		
-		    document.getElementById('fileName').textContent = null;     //기존 파일 이름 지우기
-		}
-		
-		
-		function loadFile(input) {
-		    var file = input.files[0];
-		
-		    var name = document.getElementById('fileName');
-		    name.textContent = file.name;
-		
-		    var newImage = document.createElement("img");
-		    newImage.setAttribute("class", 'img');
-		
-		    newImage.src = sessionStorage.getItem('session_img');
-		
-		    newImage.style.width = "70%";
-		    newImage.style.height = "70%";
-		    newImage.style.visibility = "visible";   //버튼을 누르기 전까지는 이미지 숨기기
-		    newImage.style.objectFit = "contain";
-		
-		    var container = document.getElementById('image-show');
-		    container.appendChild(newImage);
+		document.getElementById('fileInput').onchange = function(event) {
+		    var reader = new FileReader();
+		    reader.onload = function(){
+		        var output = document.getElementById('imagePreview');
+		        output.src = reader.result;
+		    };
+		    reader.readAsDataURL(event.target.files[0]);
 		};
 	</script>
 </body>

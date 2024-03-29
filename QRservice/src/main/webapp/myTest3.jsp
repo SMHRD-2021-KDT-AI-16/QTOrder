@@ -113,6 +113,9 @@
 			.draggable.dragging {
 			  opacity: 0.5;
 			}
+			.btn-dark:hover {
+				background-color: #FFC0CB;
+			}
 			
 			.drag-container {
 			  margin: 10px;
@@ -123,6 +126,23 @@
 			
 			.drag-menu {
 				background-color: #ffffff;
+			}
+			
+			.group {
+				text-align: center;
+				/* white-space: nowrap; */
+				overflow: hidden;
+			}
+			.item {
+				width: 20vw;
+			  	height: 8vw;
+			  	background-position: center;
+			  	background-size: 8vh cover;
+			  	margin: 1vw;
+			  	border-radius: 5%;
+			  	display: block;
+			  	cursor: pointer;
+			  	opactiy: 30%;
 			}
 		</style>
 		<meta charset="utf-8" />
@@ -363,7 +383,7 @@
                             <div class="collapse" id="collapsePages" data-bs-parent="#accordionSidenav">
                                 <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPagesMenu">
                                     <a class="nav-link" href="myTest.jsp">메인 사진</a>
-                                    <a class="nav-link" href="myTest2.jsp">메뉴 등록</a>
+                                    <a class="nav-link" href="myTest4.jsp">메뉴 등록</a>
                                     <a class="nav-link" href="myTest3.jsp">설정</a>
                                 </nav>
                             </div>
@@ -412,7 +432,7 @@
                         <!-- Illustration dashboard card example-->
                         <nav class = "nav nav-borders">
                         	<a class = "nav-link ms-0" href = "TestServlet">메인 사진</a>
-                        	<a class = "nav-link " href = "myTest2.jsp">메뉴 등록</a>
+                        	<a class = "nav-link " href = "myTest4.jsp">메뉴 등록</a>
                         	<a class = "nav-link active" href = "myTest3.jsp">설정</a>
                         	<a class = "nav-link " href = "#!">미리보기</a>
                         </nav>
@@ -436,45 +456,9 @@
                                     		</div>                                    		
                                     	</div>
                                     </div>
-                                    <%
-										String fileDir = "assets/img/hotdog"; //파일을 보여줄 디렉토리
-																		//String filePath = request.getRealPath(fileDir) + "/"; 
-										String filePath = request.getRealPath(fileDir) + "/";
-					
-										File f = new File(filePath);
-										File[] files = f.listFiles(); //파일의 리스트를 대입
-										
-										for ( int i = 0; i < files.length; i++ ) {
-										  if ( files[i].isFile()){
-										    //out.println(files[i].getName());
-										    //System.out.println(files[i].getName());
-										   	//System.out.println(filePath);
-										  }
-										} 
-									%>
-                                    <div class="card-body px-0" id='main-menu-list'>           
-	                                    <%
-	                                    	for(int i = 0; i < listMenuVO.size(); i++) { 
-	                                    		if(listMenuVO.get(i).getMenu_main() == 1) { %>
-	                                    			<div class="d-flex align-items-center justify-content-between px-4">
-					                                    <div class="d-flex align-items-center">
-					                                        <!-- <i class="fab fa-cc-visa fa-2x cc-color-visa"></i> -->
-					                                        <img class = 'image-thumnail' 
-                                           						 src = '${ session_img }/<%= files[0].getName() %>' >
-					                                        <div class="ms-4">
-					                                            <div class="small">
-					                                            	<h3><%= listMenuVO.get(i).getMenu_name() %></h3>
-					                                            </div>
-					                                        </div>
-					                                    </div>
-					                                    <div class="ms-4 small">
-					                                        <!-- <div class="badge bg-light text-dark me-3">Default</div> -->
-					                                        <%-- <a class="badge bg-info text-white rounded-pill" href="DeleteMainMenu?menu=<%= listMenuVO.get(i).getMenu_name()%>">Delete</a> --%>
-					                                    	<button class="btn btn-outline-indigo btn-sm rounded-pill" onclick="deleteMainMenu('<%= listMenuVO.get(i).getMenu_name()%>')">Delete</button>
-					                                    </div>
-					                                </div>
-					                                <hr />
-	                                    <%	}	} %>		                                	
+                                    
+                                    <div class="group" id='main-menu-list'>           
+	                                   	                                	
                                     </div>
                                 </div>                                
                             </div>
@@ -569,7 +553,7 @@
 						for(let i = 0; i < group_info[group_info.length - 1].length; i++) { // 3번 반복
 							element += `
 		 							<div>\${ group_info[group_info.length - 1][i].group_name }
-		 							<a class="btn btn-datatable btn-icon btn-transparent-dark" href="#!"><i data-feather="trash-2"></i></a>	
+		 								<a class="btn btn-datatable btn-icon btn-transparent-dark" href="#!"><i data-feather="trash-2"></i></a>	
 		 							</div> 							
 		 						<div class="drag-container drag-menu-group" data-set="\${ group_info[group_info.length - 1][i].group_idx }">
 		 					`;
@@ -645,6 +629,7 @@
 	        });
 	    });
 	</script>
+	<script src='https://unpkg.co/gsap@3/dist/gsap.min.js'></script><script  src="./script.js"></script>
 	<script>	
 		function addMainMenu(menu_name) {
 			 $.ajax({
@@ -685,22 +670,10 @@
 	 				let temp = data[i].menu_name;
 	 							 				
 				 	element = element +  
-			 			`	<div class="d-flex align-items-center justify-content-between px-4">
-				 				<div class="d-flex align-items-center">
-				 					<img class = 'image-thumnail' 
-	                               		src = 'http://localhost:8082/QRservice/assets/img/hotdog/main1.jpg' >
-	                               	<div class="ms-4">
-	                               		<div class="small">
-	                               			<h3>\${ temp }</h3>
-	                               		</div>
-	                               	</div>
-	                             </div>
-			                     <div class="ms-4 small">
-			                                        <!-- <div class="badge bg-light text-dark me-3">Default</div> -->
-			                                        <%-- <a class="badge bg-info text-white rounded-pill" href="DeleteMainMenu?menu=<%= listMenuVO.get(i).getMenu_name()%>">Delete</a> --%>
-			                     	<button class="btn btn-outline-indigo btn-sm rounded-pill" onclick="deleteMainMenu('\${ temp }')">Delete</button>
-			                     </div>
-			                </div>
+			 			`	<div class="item" style="background-image: url(http://localhost:8082/QRservice/assets/img/hotdog/main1.jpg)">				 				
+				 				<button class="btn btn-outline-indigo btn-sm rounded-pill" onclick="deleteMainMenu('\${ temp }')">Delete</button>				                    
+			                	<h1 style="color:white;"> \${ temp } </h1>
+				 			</div>
 			                <hr />
 			 			`;			
 	 			}			 			
@@ -721,7 +694,7 @@
 						 console.log("error");
 					}
 				 });//end ajax 
-    		}, 1000)    		
+    		}, 10000)    		
     	}
 		function stopInterval() {
     		clearInterval(interval);
@@ -736,6 +709,33 @@
 		startInterval();		
 	</script>
     <script>
+    $(document).on("mouseover", "#group-container", function() { 
+	    const items = document.querySelectorAll('.item')
+	
+	    const expand = (item, i) => {
+	      items.forEach((it, ind) => {
+	        if (i === ind) return
+	        it.clicked = false
+	      })
+	      gsap.to(items, {
+	        height: item.clicked ? '8vw' : '4vw',
+	        duration: 2,
+	        ease: 'elastic(1, .6)'
+	      })
+	      
+	      item.clicked = !item.clicked
+	      gsap.to(item, {
+	    	  height: item.clicked ? '15vw' : '8vw',
+	        duration: 2.5,
+	        ease: 'elastic(1, .3)'
+	      })
+	    }
+	
+	    items.forEach((item, i) => {
+	      item.clicked = false
+	      item.addEventListener('click', () => expand(item, i))
+	    })
+    })
 		var submit = document.getElementById('submitButton');
 		submit.onclick = showImage();     //Submit 버튼 클릭시 이미지 보여주기
 		
