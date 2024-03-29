@@ -50,7 +50,7 @@
 	</update>
 		
 	<select id="selectOrderList" parameterType = 'kr.qtorder.model.MenuVO'  resultType = 'hashmap'  >
-		select A.order_idx, B.menu_name, A.menu_cnt, B.menu_price, D.ft_name, C.order_state  
+		select A.order_idx, B.menu_name, A.menu_cnt, B.menu_price, D.ft_name, C.order_state, B.menu_img  
 		from tb_order_menu A
 			left outer join tb_menu B
 		    on A.menu_idx = B.menu_idx
@@ -84,7 +84,7 @@
 	</delete>
 	
 	<select id = "selectOrderMenuDetail" resultType = 'hashmap'  >
-		select A.om_idx, A.order_idx, A.menu_idx, A.menu_cnt, A.mo_idx, B.menu_name, C.mo_name, D.mo_notice, B.menu_price
+		select A.om_idx, A.order_idx, A.menu_idx, A.menu_cnt, A.mo_idx, B.menu_name, C.mo_name, D.mo_notice, B.menu_price, B.menu_img
 		from tb_order_menu A
 			left outer join tb_menu B
 			on A.menu_idx = B.menu_idx

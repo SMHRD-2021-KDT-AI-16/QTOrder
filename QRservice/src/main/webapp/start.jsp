@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Insert title here</title>
+    <title>QTOrder</title>
     <style>    
        body {
            display: flex;
@@ -147,6 +147,7 @@
   right: 0;
 }
     </style>
+    <link href="css/yg.css" rel="stylesheet" />
 </head>
 <body>
    <div class="box"></div>

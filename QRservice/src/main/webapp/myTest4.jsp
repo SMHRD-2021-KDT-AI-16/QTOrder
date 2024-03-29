@@ -141,7 +141,11 @@
 				transform: rotateY(180deg);
 			}
 			.flip-card-front{
-				background-color: #b2a49e;
+				background-color: #e4d4bb;
+				background-image: repeating-radial-gradient(circle, 
+				    #E4D4BB, #D6C5AD 50%, #D6C5AD 100%
+				  );
+				  background-size: 10px 10px;
 				z-index: 2;
 			}
 			.flip-card-back{
