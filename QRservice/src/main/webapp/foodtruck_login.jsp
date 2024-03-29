@@ -32,7 +32,7 @@
 									
 										<div class="mb-3">
 											<label class="small mb-1" for="inputPassword">비밀번호</label>
-											<input class="form-control" id="inputPassword" type="text" placeholder="비밀번호를 입력해주세요." />
+											<input class="form-control" id="inputPassword" type="password" placeholder="비밀번호를 입력해주세요." />
 										</div>
 										<a href="foodtruck_join.jsp">회원가입</a>
 										<div class="d-flex align-items-center justify-content-between mt-4 mb-0">

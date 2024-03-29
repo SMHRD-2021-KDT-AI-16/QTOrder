@@ -156,7 +156,7 @@
     
     <script type="text/javascript">
         setTimeout(function() {
-            window.location.href = "fesAdminLogin.jsp";
+            window.location.href = "cust_login.jsp";
         }, 6000);
     </script>
 </body>

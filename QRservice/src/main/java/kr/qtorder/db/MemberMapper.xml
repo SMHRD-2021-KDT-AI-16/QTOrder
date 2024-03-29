@@ -37,7 +37,7 @@
 	
 	<update id="updateMenu" parameterType="hashmap" >		
 		update tb_menu
-		set menu_name = #{menu_name}, menu_price = #{menu_price}, menu_info = #{menu_info}, menu_waiting_time = #{menu_duration}
+		set menu_name = #{menu_name}, menu_price = #{menu_price}, menu_info = #{menu_info}, menu_waiting_time = #{menu_duration}, menu_img = #{menu_image}
 		where menu_idx = #{menu_idx};
 	</update>
 	
