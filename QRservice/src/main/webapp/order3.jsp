@@ -566,7 +566,7 @@
                      <div style="background:none; flex: 0; position: relative; z-index: 100;">                            
                                 <div id="moveCardLeftButton" class="arrow01" style="position: fixed; left: 16%; bottom: 10%;"></div>
                                 <div id="moveCardRightButton" class="arrow02" style="position: fixed; right: 5%; bottom: 10%;"></div>
-                                <button id="startButton" class="btn-3d green" style="position: fixed; left: 25%; bottom: 10%;">LEARN MORE</button>
+                                <button id="startButton" class="btn-3d green" style="position: fixed; left: 25%; bottom: 10%;">영업 시작</button>
                                 <button id="stopButton" class="btn-3d green" style="position: fixed; left: 41%; bottom: 10%;">영업 종료</button>
                         <form id="orderForm" action="" style="position: fixed; left: 78%; bottom: 10%;">
                            <div>

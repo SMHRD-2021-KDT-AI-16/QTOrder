@@ -84,8 +84,8 @@
 				<div class="container-xl px-4">
 					<div class="d-flex align-items-center justify-content-between mt-4 mb-0">
 						<div id = "total_money" class="small">총 결제 금액 : 0원</div>
-						<a class="btn btn-qtbtn" type="button" href="getcarT.do">결제(영수증)</a>
-						<button class="btn btn-qtbtn" type="button" onclick="requestPay()">결제(api)</button>
+						<a class="btn btn-qtbtn" type="button" href="getcarT.do" >결제</a>
+						<button class="btn btn-qtbtn" type="button" onclick="requestPay()"style="display: none;">결제</button>
 					</div>
 				</div>
 			</main>

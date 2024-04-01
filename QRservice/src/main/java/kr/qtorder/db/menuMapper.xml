@@ -130,7 +130,7 @@
 		left join tb_foodtruck as b on a.ft_idx = b.ft_idx) as a
 		left join tb_menu as b on a.menu_idx = b.menu_idx)as a
 		left join tb_menu_option as b on a.mo_idx = b.mo_idx) as a
-		left join tb_option_detail as b on a.od_idx= b.od_idx
+		left join tb_option_detail as b on a.od_idx= b.od_idx order by ordered_at desc
 	</select>
 	
 	

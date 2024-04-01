@@ -9,7 +9,7 @@
 		SELECT * FROM tb_foodtruck
 	</select>
 	
-	<insert id="insert_business" parameterType="kr.qtorder.model.BusinessVO">
+	<insert id="insert_business2" parameterType="kr.qtorder.model.BusinessVO">
 		insert into tb_foodtruck (ft_name, ft_tel, ft_owner, ft_bno, ft_pw) values (#{ft_name},#{ft_tel},#{ft_owner},#{ft_bno},#{ft_pw});
 	</insert>
 

@@ -11,7 +11,7 @@ public class JoinDAO222 {
 	public int businessInsert(BusinessVO bvo) {
 		SqlSession session = factory.openSession(true);
 		
-		int row = session.insert("insert_business", bvo);
+		int row = session.insert("insert_business2", bvo);
 		session.close();
 		
 		return row;

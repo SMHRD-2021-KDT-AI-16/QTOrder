@@ -44,7 +44,8 @@
                             <div class="card-header p-4 p-md-5 border-bottom-0 text-white-50">
                                 <div class="row justify-content-between align-items-center">
                                     <div class="col-12 col-lg-auto mb-5 mb-lg-0 text-center text-lg-start">
-                                        <img class="" src="${menuDetail.get(0).getMenu_img()}" alt="" style="width: 100%; height: 100%" />
+                                        <%-- <img class="" src="${menuDetail.get(0).getMenu_img()}" alt="" style="width: 100%; height: 100%" /> --%>
+                                        <div class="mb-3"><img alt="대표메뉴 사진" src="assets/img/hotdog/hotdog1.jpg" style="width: 100%; height: 100%"></div>
                                     </div>
                                 </div>
                             </div>
