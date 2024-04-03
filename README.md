@@ -58,29 +58,16 @@
 - **푸드트럭 메뉴 등록**
   - 사업자가 언제든 본인의 매장 메뉴를 수정 가능
 <img src="https://github.com/SMHRD-2021-KDT-AI-16/QTOrderRepo/assets/152265634/dfa13d59-a91b-4285-9e38-63d1a0289d7e" width="450px" height="300px" title="px(픽셀) 크기 설정"></img><br/>
+
 - **푸드트럭 주문 현황**
   - 내장형 web API를 사용하여 음성으로 주문현황의 동작들을 처리할 수 있음.
 <img src="https://github.com/SMHRD-2021-KDT-AI-16/QTOrderRepo/assets/152265634/e72a220e-e4fd-4152-b76c-617a97bb4c87" width="450px" height="300px" title="px(픽셀) 크기 설정"></img><br/>
 
 
 ### 4.3. 소비자 기능
-
 - **간편 오더 시스템**
   - 축제 및 행사장에 있는 전체 푸드트럭의 현황을 볼수 있고, 해당 푸드트럭의 메뉴를 원거리에서 주문가능
 <img src="https://github.com/SMHRD-2021-KDT-AI-16/QTOrderRepo/assets/152265634/f5d9e208-f45f-443f-9aa7-3aeb1acd5e12" width="450px" height="300px" title="px(픽셀) 크기 설정"></img><br/>
-
-
-### 4.4. Service
-
-- **내용입력하세요** 
-  - 내용입력하세요
-
-### 4.5. DB
-- **내용입력하세요**
-  - 내용입력하세요 :📌:[코드 확인](https://github.com/SMHRD-2021-KDT-AI-16/EarlyRepo/blob/ca21383ecc3d21a0e8497b68094cb30ecd287e8b/GitTest1/src/main/webapp/html/Profile.jsp#L240)
- 
-- **내용입력하세요**
-  - 내용입력하세요
     
 
 </div>
@@ -89,12 +76,12 @@
 </br>
 
 ## 5. 핵심 트러블 슈팅
-### 5.1. 내용입력하세요
-- 내용입력하세요
+### 5.1. 동적 html요소 이벤트 할당
+- 동적으로 생성된 HTML요소에 대해 자바 스크립트의 이벤트가 할당되지 않아 원하는 동작이 이루어지지 않는 현상
 
-- 내용입력하세요
+- 해당 현상의 원인은 이벤트리스너는 페이지가 로드된 그 상황에서 존재하는 요소들에게만 할당되기 때문
 
--내용입력하세요
+- 해결방안은 상위 요소에 이벤트를 위임하고 JQuery의 on()메소드를 활용하여 해결
 
 <details>
 <summary><b>기존 코드</b></summary>
