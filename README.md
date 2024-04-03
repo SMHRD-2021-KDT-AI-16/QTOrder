@@ -35,7 +35,7 @@
 </br>
 
 ## 3. ERD 설계
-![ERD2](![image](https://github.com/SMHRD-2021-KDT-AI-16/QTOrderRepo/assets/152265634/da5bc008-8de0-46d2-a037-547bcdcba37a)
+![image](https://github.com/SMHRD-2021-KDT-AI-16/QTOrderRepo/assets/152265634/da5bc008-8de0-46d2-a037-547bcdcba37a)
 
 
 
@@ -49,29 +49,25 @@
 
 ### 4.1. 전체 흐름
 
-![](![image](https://github.com/SMHRD-2021-KDT-AI-16/QTOrderRepo/assets/152265634/a0c00aa9-8b9b-403b-8afd-9960ade7631d)
+![image](https://github.com/SMHRD-2021-KDT-AI-16/QTOrderRepo/assets/152265634/a0c00aa9-8b9b-403b-8afd-9960ade7631d)
 
 
 
-### 4.2. 내용입력하세요
+### 4.2. 사업자 기능
 
-- **내용입력하세요**
-  - 내용입력하세요  
-<img src="https://github.com/SMHRD-2021-KDT-AI-16/EarlyRepo/assets/152265634/e7371fd4-87b5-4d85-9517-cb07cc870176" width="450px" height="300px" title="px(픽셀) 크기 설정"></img><br/>
-- **내용입력하세요**
-  - 내용입력하세요
-  - 내용입력하세요
-  - 내용입력하세요  
-<img src="https://github.com/SMHRD-2021-KDT-AI-16/EarlyRepo/assets/152379979/475b7f1f-440e-42f0-9b2b-5dd77d2718b2" width="450px" height="300px" title="px(픽셀) 크기 설정"></img><br/>
+- **푸드트럭 메뉴 등록**
+  - 사업자가 언제든 본인의 매장 메뉴를 수정 가능
+<img src="https://github.com/SMHRD-2021-KDT-AI-16/QTOrderRepo/assets/152265634/dfa13d59-a91b-4285-9e38-63d1a0289d7e" width="450px" height="300px" title="px(픽셀) 크기 설정"></img><br/>
+- **푸드트럭 주문 현황**
+  - 내장형 web API를 사용하여 음성으로 주문현황의 동작들을 처리할 수 있음.
+<img src="https://github.com/SMHRD-2021-KDT-AI-16/QTOrderRepo/assets/152265634/e72a220e-e4fd-4152-b76c-617a97bb4c87" width="450px" height="300px" title="px(픽셀) 크기 설정"></img><br/>
 
 
-### 4.3. FrontController
+### 4.3. 소비자 기능
 
-- **내용입력하세요**
-  - 내용입력하세요
-
-- **내용입력하세요**
-  - 내용입력하세요
+- **간편 오더 시스템**
+  - 축제 및 행사장에 있는 전체 푸드트럭의 현황을 볼수 있고, 해당 푸드트럭의 메뉴를 원거리에서 주문가능
+<img src="https://github.com/SMHRD-2021-KDT-AI-16/QTOrderRepo/assets/152265634/f5d9e208-f45f-443f-9aa7-3aeb1acd5e12" width="450px" height="300px" title="px(픽셀) 크기 설정"></img><br/>
 
 
 ### 4.4. Service
