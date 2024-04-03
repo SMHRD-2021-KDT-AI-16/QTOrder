@@ -7,7 +7,11 @@
 
 ## 1. 제작 기간 & 참여 인원
 - 2024년 02월 23일 ~ 2024년 3월 31일
-- 팀 프로젝트
+- 팀 프로젝트(역할)
+  - 구임규 : PM, 외부API활용, 장바구니관련 페이지 및 기능, 축제등록 페이지 및 기능
+  - 최고봉 : DB설계, 사업자페이지, 3D효과 구현, 주문현황 및 관리, 메뉴 관리 및 카테고리화 구현
+  - 최현민 : 참여업체 등록, 푸드트럭 메뉴, 사업자 공지사항, 매출확인 등 페이지 및 기능 구현, 자료조사
+  - 주은혜 : 개인공부
 
 </br>
 
@@ -57,6 +61,7 @@
 
 - **푸드트럭 메뉴 등록**
   - 사업자가 언제든 본인의 매장 메뉴를 수정 가능
+ 
 <img src="https://github.com/SMHRD-2021-KDT-AI-16/QTOrderRepo/assets/152265634/dfa13d59-a91b-4285-9e38-63d1a0289d7e" width="450px" height="300px" title="px(픽셀) 크기 설정"></img><br/>
 
 - **푸드트럭 주문 현황**
@@ -83,131 +88,10 @@
 
 - 해결방안은 상위 요소에 이벤트를 위임하고 JQuery의 on()메소드를 활용하여 해결
 
-<details>
-<summary><b>기존 코드</b></summary>
-<div markdown="1">
-
-~~~java
-
-/**
- * 대출 추천
- * @tb_loan 대출 정보
- * @tb_loan_criteria 비교할 대출 정보
- * @loan_name 대출 명
- * @loan_limit 대출 한도
- * @loan_seq 대출 코드
- * #{FIRST_HOUSE_YN} 최초 주택 구입 여부
- * #{DUPLICATE_YN} 중복 대출 여부
- * #{MARRIAGE_YEARS} 결혼 기간
- * #{INCOME} 연소득
- */
-
-	<select id="SelectLoans" parameterType="com.early.model.LoanVO"
-		resultType="com.early.model.LoanNameVO">
-		SELECT a.loan_name, a.loan_limit
-		FROM tb_loan a
-		JOIN
-		tb_loan_criteria b ON a.loan_seq = b.loan_seq
-		WHERE FIRST_HOUSE_YN =
-		#{FIRST_HOUSE_YN}
-		AND DUPLICATE_YN = #{DUPLICATE_YN}
-		AND
-		MARRIAGE_YEARS >= #{MARRIAGE_YEARS}
-		AND INCOME <= #{INCOME}
-	</select>
-
-/**
- * 부동산 추천
- * @tb_apartment 아파트
- * @tb_apartment_info 아파트 상세정보
- * @apt_name 아파트 명
- * @apt_realprice 실거래가
- * @apt_loc 아파트 주소
- * @apt_code 아파트 코드
- * #{total} 사용자 자산정보
- */
-
-	<select id="getCompare" parameterType="String" resultType="com.early.model.CompareVO">
-		SELECT a.apt_name, b.apt_realprice, a.apt_loc
-		FROM tb_apartment a,
-		tb_apartment_info b
-		WHERE a.apt_code = b.apt_code
-		AND b.apt_realprice <#{total}
-	</select>
-
-/**
- * 부동산 추천2
- * #{total_money} 사용자 자산정보
- */
-	<select id="getCompare2" parameterType="int" resultType="com.early.model.CompareVO">
-        SELECT a.apt_name, a.apt_loc, b.apt_realprice
-        FROM tb_apartment a
-        JOIN tb_apartment_info b ON a.apt_code = b.apt_code
-        WHERE b.apt_realprice < #{total_money}
-~~~
-
-</div>
-</details>
-
-- 내용입력하세요
-- 내용입력하세요
-
-<details>
-<summary><b>개선된 코드</b></summary>
-<div markdown="1">
-
-~~~java
-/**
- * 대출 추천
- */
-	<select id="SelectLoans" parameterType="com.early.model.LoanVO"
-		resultType="com.early.model.LoanNameVO">
-		<![CDATA[
-		SELECT a.loan_name, a.loan_limit
-		FROM tb_loan a
-		JOIN
-		tb_loan_criteria b ON a.loan_seq = b.loan_seq
-		WHERE FIRST_HOUSE_YN =
-		#{FIRST_HOUSE_YN}
-		AND DUPLICATE_YN = #{DUPLICATE_YN}
-		AND
-		MARRIAGE_YEARS >= #{MARRIAGE_YEARS}
-		AND INCOME <= #{INCOME}
-		]]>
-	</select>
-
-/**
- * 부동산 추천
- */
-	<select id="getCompare" parameterType="String" resultType="com.early.model.CompareVO">
-		SELECT a.apt_name, b.apt_realprice, a.apt_loc
-		FROM tb_apartment a,
-		tb_apartment_info b
-		WHERE a.apt_code = b.apt_code
-		AND b.apt_realprice <![CDATA[<]]>
-		#{total}
-	</select>
-
-/**
- * 부동산 추천2
- */
-	<select id="getCompare2" parameterType="int" resultType="com.early.model.CompareVO">
-	<![CDATA[
-        SELECT a.apt_name, a.apt_loc, b.apt_realprice
-        FROM tb_apartment a
-        JOIN tb_apartment_info b ON a.apt_code = b.apt_code
-        WHERE b.apt_realprice < #{total_money}
-    ]]>
-	</select>
-}
-~~~
-
-</div>
-</details>
 
 </br>
 
-## 6. 내용입력하세요
+## 6. 그 외 트러블 슈팅
 <details>
 <summary>내용입력하세요</summary>
 <div markdown="1">
@@ -294,5 +178,9 @@
     
 </br>
 
-## 6. 회고 / 느낀점
+## 7. 회고 / 느낀점
+- 구임규
+- 최고봉
+- 최현민
+- 주은혜
 
