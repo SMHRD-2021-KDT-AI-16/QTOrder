@@ -93,10 +93,12 @@
 
 ## 6. 그 외 트러블 슈팅
 <details>
-<summary>내용입력하세요</summary>
+<summary>네이버 소셜로그인 API 관련</summary>
 <div markdown="1">
 
-- 내용입력하세요
+- 다른 환경에서도 소셜로그인이 진행될 수 있도록 URL을 변경 후 ajax나 session에 데이터를 저장하는 행위 자체가 이루어지지 않는 현상
+- CORS 정책 위반으로 발생한 현상으로 Filter에서 헤더에 허용한다는 내용을 포함해서 전송해야 해결 가능
+- ex) httpResponse.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:8081"); 
 
 </div>
 </details>
@@ -179,8 +181,8 @@
 </br>
 
 ## 7. 회고 / 느낀점
-- 구임규
-- 최고봉
-- 최현민
-- 주은혜
+- 구임규 : 
+- 최고봉 : 
+- 최현민 : 
+- 주은혜 : 
 
