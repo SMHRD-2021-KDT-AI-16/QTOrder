@@ -14,13 +14,17 @@
 ## 2. 사용 기술
 #### `Back-end`
   - Java
+  - JSP
   - Python
-  - oracle database
+  - MySQL database
   - Apache Tomcat9.0
     
 #### `Front-end`
   - JavaScript
   - css
+  - html
+  - JSP
+  - bootstrap
 
 #### `IDE`
   - Eclipse
@@ -31,7 +35,7 @@
 </br>
 
 ## 3. ERD 설계
-![ERD2](https://github.com/SMHRD-2021-KDT-AI-16/EarlyRepo/assets/152379979/e8b3d332-67c3-44b9-b3b4-1b408d41bc71)
+![ERD2](![image](https://github.com/SMHRD-2021-KDT-AI-16/QTOrderRepo/assets/152265634/da5bc008-8de0-46d2-a037-547bcdcba37a)
 
 
 
@@ -45,7 +49,7 @@
 
 ### 4.1. 전체 흐름
 
-![](https://github.com/SMHRD-2021-KDT-AI-16/EarlyRepo/assets/152265634/47587d45-ae45-4e34-9874-b52474d02193)
+![](![image](https://github.com/SMHRD-2021-KDT-AI-16/QTOrderRepo/assets/152265634/a0c00aa9-8b9b-403b-8afd-9960ade7631d)
 
 
 
